@@ -10,5 +10,8 @@ namespace ExpenseTracker.Model
         public Account Account { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        public int? TransferAccountId { get; set; }   
+        public Account? TransferAccount { get; set; }
     }
 }
