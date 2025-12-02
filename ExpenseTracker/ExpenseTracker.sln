@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36511.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Model", "CRM.Model\CRM.Model.csproj", "{A0655090-4ADF-4EE4-83C6-938A0287A4FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.SqlDbContext", "CRM.SqlDbContext\CRM.SqlDbContext.csproj", "{CD5A7B40-7BC4-4439-B09C-B9074097AA9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.ApplicationSqlDbContext", "CRM.ApplicationSqlDbContext\CRM.ApplicationSqlDbContext.csproj", "{F6EFA34D-BA44-4F46-BA85-C8D8A0F402C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A0655090-4ADF-4EE4-83C6-938A0287A4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0655090-4ADF-4EE4-83C6-938A0287A4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0655090-4ADF-4EE4-83C6-938A0287A4FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD5A7B40-7BC4-4439-B09C-B9074097AA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD5A7B40-7BC4-4439-B09C-B9074097AA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD5A7B40-7BC4-4439-B09C-B9074097AA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD5A7B40-7BC4-4439-B09C-B9074097AA9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EFA34D-BA44-4F46-BA85-C8D8A0F402C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EFA34D-BA44-4F46-BA85-C8D8A0F402C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EFA34D-BA44-4F46-BA85-C8D8A0F402C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EFA34D-BA44-4F46-BA85-C8D8A0F402C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
