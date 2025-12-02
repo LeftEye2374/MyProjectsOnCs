@@ -2,9 +2,14 @@
 {
     public enum DeviceType
     {
-        Computer,
-        Phone,
+        Unknown, 
+        Computer, 
+        Phone, 
         Router,
-        etc
+        Printer,
+        IoT, 
+        Server,
+        Switch, 
+        Other
     }
 }

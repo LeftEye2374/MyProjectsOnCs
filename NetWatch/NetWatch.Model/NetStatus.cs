@@ -4,6 +4,6 @@
     {
         Online,
         Offline,
-        Unknow
+        Unknown
     }
 }
