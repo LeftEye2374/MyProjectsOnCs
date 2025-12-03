@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace NetWatch.SqlDbContext.Migrations
+namespace NetWatch.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstVersion : Migration
+    public partial class SecondCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

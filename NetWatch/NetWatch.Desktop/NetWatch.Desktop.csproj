@@ -15,8 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NetWatch.DAL\NetWatch.DAL.csproj" />
     <ProjectReference Include="..\NetWatch.Model\NetWatch.Model.csproj" />
-    <ProjectReference Include="..\SqlDbContext\NetWatch.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Service\" />
+    <Folder Include="View\" />
   </ItemGroup>
 
 </Project>

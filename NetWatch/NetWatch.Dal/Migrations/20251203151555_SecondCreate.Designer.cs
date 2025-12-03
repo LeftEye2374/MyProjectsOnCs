@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetWatch.SqlDbContext;
+using NetWatch.DAL;
 
 #nullable disable
 
-namespace NetWatch.SqlDbContext.Migrations
+namespace NetWatch.DAL.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
-    [Migration("20251203142510_FirstVersion")]
-    partial class FirstVersion
+    [Migration("20251203151555_SecondCreate")]
+    partial class SecondCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

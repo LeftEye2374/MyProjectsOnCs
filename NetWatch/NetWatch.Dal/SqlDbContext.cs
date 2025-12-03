@@ -1,8 +1,7 @@
-﻿// SqlDbContext.cs
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NetWatch.Model;
 
-namespace NetWatch.SqlDbContext
+namespace NetWatch.DAL
 {
     public class SqlDbContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace NetWatch.SqlDbContext
+namespace NetWatch.DAL
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<SqlDbContext>
     {

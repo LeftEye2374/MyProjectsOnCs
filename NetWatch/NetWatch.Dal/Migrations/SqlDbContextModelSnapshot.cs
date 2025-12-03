@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetWatch.SqlDbContext;
+using NetWatch.DAL;
 
 #nullable disable
 
-namespace NetWatch.SqlDbContext.Migrations
+namespace NetWatch.DAL.Migrations
 {
     [DbContext(typeof(SqlDbContext))]
     partial class SqlDbContextModelSnapshot : ModelSnapshot
