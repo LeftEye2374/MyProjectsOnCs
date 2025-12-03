@@ -1,8 +1,8 @@
 ﻿namespace NetWatch.Model
 {
-    public class Alert
+    public class Alert : BaseEntity
     {
-        public int? DeviceId { get; set; }
+        public Guid? DeviceId { get; set; }
         public AlertType AlertType { get; set; } = default!;
         public string Message { get; set; } = default!;
         public AlertLevel AlertLevel { get; set; } = default!;
