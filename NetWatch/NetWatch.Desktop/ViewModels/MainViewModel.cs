@@ -1,12 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NetWatch.Model;
 using NetWatch.Model.Entities;
+using NetWatch.Model.Enums;
+using NetWatch.Model.Interfaces;
 using System.Collections.ObjectModel;
 
 namespace NetWatch.Desktop.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
+        private readonly INetworkScanner _networkScanner;
+        private readonly IDeviceService _deviceService;
+        private readonly IAlertService _alertService;
+
         [ObservableProperty]
         private string _title = "NetWatch Desktop";
 
@@ -22,8 +29,26 @@ namespace NetWatch.Desktop.ViewModels
         [ObservableProperty]
         private string _statusMessage = "Ready";
 
-        public bool IsNotScanning => !IsScanning;
+        [ObservableProperty]
+        private int _devicesCount;
 
+        public MainViewModel(
+            INetworkScanner networkScanner,
+            IDeviceService deviceService,
+            IAlertService alertService)
+        {
+            _networkScanner = networkScanner;
+            _deviceService = deviceService;
+            _alertService = alertService;
+
+            _networkScanner.DeviceDiscovered += OnDeviceDiscovered;
+            _networkScanner.ScanStatusChanged += OnScanStatusChanged;
+            _networkScanner.ScanProgressChanged += OnScanProgressChanged;
+
+            _alertService.AlertCreated += OnAlertCreated;
+
+            LoadDevicesFromDatabase();
+        }
 
         [RelayCommand]
         private async Task StartScanAsync()
@@ -31,32 +56,34 @@ namespace NetWatch.Desktop.ViewModels
             if (IsScanning) return;
 
             IsScanning = true;
-            StatusMessage = "Scanning network...";
+            StatusMessage = "Starting network scan...";
 
             try
             {
-                // TODO: Реализовать настоящее сканирование сети
-                await Task.Delay(2000); // Имитация сканирования
-
-                // TODO: Добавить найденные устройства в коллекцию Devices
-                StatusMessage = "Scan completed. Found 0 devices.";
+                Devices.Clear();
+                var foundDevices = await _networkScanner.ScanNetworkAsync("192.168.1.0/24");
+                await _deviceService.AddOrUpdateDevicesAsync(foundDevices);
+                await _alertService.CreateScanCompletedAlertAsync(foundDevices.Count);
+                StatusMessage = $"Scan completed. Found {foundDevices.Count} devices.";
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Scan error: {ex.Message}";
+                StatusMessage = $"Scan failed: {ex.Message}";
+                await _alertService.CreateScanFailedAlertAsync(ex.Message);
             }
             finally
             {
                 IsScanning = false;
+                await LoadDevicesFromDatabase();
             }
         }
 
         [RelayCommand]
-        private void RefreshDeviceList()
+        private async Task RefreshDeviceListAsync()
         {
             StatusMessage = "Refreshing device list...";
-            // TODO: Загрузить устройства из базы данных
-            StatusMessage = "Device list refreshed.";
+            await LoadDevicesFromDatabase();
+            StatusMessage = $"Device list refreshed. Total: {Devices.Count}";
         }
 
         [RelayCommand]
@@ -68,37 +95,116 @@ namespace NetWatch.Desktop.ViewModels
                 return;
             }
 
-            StatusMessage = $"Selected device: {SelectedDevice.IpAddress}";
+            StatusMessage = $"Selected device: {SelectedDevice.IpAddress} ({SelectedDevice.HostName})";
         }
 
         [RelayCommand]
-        private void MarkDeviceAsTrusted()
+        private async Task MarkDeviceAsTrustedAsync()
         {
             if (SelectedDevice == null) return;
 
-            SelectedDevice.IsTrusted = !SelectedDevice.IsTrusted;
-            StatusMessage = SelectedDevice.IsTrusted
-                ? $"Device {SelectedDevice.IpAddress} marked as trusted"
-                : $"Device {SelectedDevice.IpAddress} marked as untrusted";
+            try
+            {
+                await _deviceService.MarkAsTrustedAsync(SelectedDevice.Id, !SelectedDevice.IsTrusted);
+                SelectedDevice.IsTrusted = !SelectedDevice.IsTrusted;
+
+                StatusMessage = SelectedDevice.IsTrusted
+                    ? $"Device {SelectedDevice.IpAddress} marked as trusted"
+                    : $"Device {SelectedDevice.IpAddress} marked as untrusted";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+            }
         }
 
         [RelayCommand]
-        private void DeleteSelectedDevice()
+        private async Task DeleteSelectedDeviceAsync()
         {
             if (SelectedDevice == null) return;
 
-            Devices.Remove(SelectedDevice);
-            StatusMessage = $"Device {SelectedDevice.IpAddress} removed";
-            SelectedDevice = null;
+            try
+            {
+                await _deviceService.DeleteDeviceAsync(SelectedDevice.Id);
+                Devices.Remove(SelectedDevice);
+                SelectedDevice = null;
+
+                StatusMessage = "Device deleted successfully";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error deleting device: {ex.Message}";
+            }
         }
 
-        // Метод для загрузки устройств из базы данных (будет вызываться извне)
-        public async Task LoadDevicesFromDatabase()
+        [RelayCommand]
+        private async Task PingSelectedDeviceAsync()
         {
-            // TODO: Реализовать загрузку из БД
-            StatusMessage = "Loading devices from database...";
-            await Task.Delay(500); // Имитация загрузки
-            StatusMessage = "Devices loaded from database.";
+            if (SelectedDevice == null) return;
+
+            try
+            {
+                StatusMessage = $"Pinging {SelectedDevice.IpAddress}...";
+                await _deviceService.UpdateDeviceStatusAsync(SelectedDevice.Id, NetStatus.Unknown);
+                StatusMessage = $"Ping result for {SelectedDevice.IpAddress}: {SelectedDevice.Status}";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Ping failed: {ex.Message}";
+            }
         }
+
+        private async Task LoadDevicesFromDatabase()
+        {
+            try
+            {
+                var devices = await _deviceService.GetAllDevicesAsync();
+
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Devices.Clear();
+                    foreach (var device in devices)
+                    {
+                        Devices.Add(device);
+                    }
+                    DevicesCount = Devices.Count;
+                });
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error loading devices: {ex.Message}";
+            }
+        }
+
+        private void OnDeviceDiscovered(object? sender, NetworkDevice device)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Devices.Add(device);
+                DevicesCount = Devices.Count;
+            });
+        }
+
+        private void OnScanStatusChanged(object? sender, string status)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                StatusMessage = status;
+            });
+        }
+
+        private void OnScanProgressChanged(object? sender, double progress)
+        {
+            // Можно обновлять ProgressBar
+        }
+
+        private void OnAlertCreated(object? sender, Alert alert)
+        {
+            // Обработка новых уведомлений
+            // Можно показывать тосты или обновлять счетчик уведомлений
+        }
+
+        // Свойство для привязки в UI (например, для ProgressBar)
+        public bool IsNotScanning => !IsScanning;
     }
 }
