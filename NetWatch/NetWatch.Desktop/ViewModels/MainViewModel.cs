@@ -5,6 +5,7 @@ using NetWatch.Model.Entities;
 using NetWatch.Model.Enums;
 using NetWatch.Model.Interfaces;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace NetWatch.Desktop.ViewModels
 {
@@ -61,15 +62,34 @@ namespace NetWatch.Desktop.ViewModels
             try
             {
                 Devices.Clear();
+
                 var foundDevices = await _networkScanner.ScanNetworkAsync("192.168.1.0/24");
+
                 await _deviceService.AddOrUpdateDevicesAsync(foundDevices);
-                await _alertService.CreateScanCompletedAlertAsync(foundDevices.Count);
+
+                var scanCompletedAlert = new Alert
+                {
+                    AlertType = AlertType.ScanCompleted,
+                    Message = $"Сканирование сети завершено. Найдено устройств: {foundDevices.Count}",
+                    AlertLevel = AlertLevel.Info,
+                    IsAcknowledged = false
+                };
+                await _alertService.CreateAlertAsync(scanCompletedAlert);
+
                 StatusMessage = $"Scan completed. Found {foundDevices.Count} devices.";
             }
             catch (Exception ex)
             {
                 StatusMessage = $"Scan failed: {ex.Message}";
-                await _alertService.CreateScanFailedAlertAsync(ex.Message);
+
+                var scanFailedAlert = new Alert
+                {
+                    AlertType = AlertType.ScanFailed,
+                    Message = $"Ошибка сканирования сети: {ex.Message}",
+                    AlertLevel = AlertLevel.Critical,
+                    IsAcknowledged = false
+                };
+                await _alertService.CreateAlertAsync(scanFailedAlert);
             }
             finally
             {
@@ -107,6 +127,18 @@ namespace NetWatch.Desktop.ViewModels
             {
                 await _deviceService.MarkAsTrustedAsync(SelectedDevice.Id, !SelectedDevice.IsTrusted);
                 SelectedDevice.IsTrusted = !SelectedDevice.IsTrusted;
+
+                var alert = new Alert
+                {
+                    DeviceId = SelectedDevice.Id,
+                    AlertType = SelectedDevice.IsTrusted ? AlertType.DeviceOnline : AlertType.UnknownDeviceType,
+                    Message = SelectedDevice.IsTrusted
+                        ? $"Device {SelectedDevice.IpAddress} marked as trusted"
+                        : $"Device {SelectedDevice.IpAddress} marked as untrusted",
+                    AlertLevel = SelectedDevice.IsTrusted ? AlertLevel.Info : AlertLevel.Warning,
+                    IsAcknowledged = false
+                };
+                await _alertService.CreateAlertAsync(alert);
 
                 StatusMessage = SelectedDevice.IsTrusted
                     ? $"Device {SelectedDevice.IpAddress} marked as trusted"
@@ -160,15 +192,29 @@ namespace NetWatch.Desktop.ViewModels
             {
                 var devices = await _deviceService.GetAllDevicesAsync();
 
-                Application.Current.Dispatcher.Invoke(() =>
+                // Используем Dispatcher для потокобезопасного обновления UI
+                if (Application.Current?.Dispatcher != null)
                 {
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        Devices.Clear();
+                        foreach (var device in devices)
+                        {
+                            Devices.Add(device);
+                        }
+                        DevicesCount = Devices.Count;
+                    });
+                }
+                else
+                {
+                    // Если нет Dispatcher, обновляем напрямую (для тестов)
                     Devices.Clear();
                     foreach (var device in devices)
                     {
                         Devices.Add(device);
                     }
                     DevicesCount = Devices.Count;
-                });
+                }
             }
             catch (Exception ex)
             {
@@ -176,21 +222,28 @@ namespace NetWatch.Desktop.ViewModels
             }
         }
 
-        private void OnDeviceDiscovered(object? sender, NetworkDevice device)
+        private async void OnDeviceDiscovered(object? sender, NetworkDevice device)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            // Асинхронно добавляем устройство в коллекцию
+            if (Application.Current?.Dispatcher != null)
             {
-                Devices.Add(device);
-                DevicesCount = Devices.Count;
-            });
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    Devices.Add(device);
+                    DevicesCount = Devices.Count;
+                });
+            }
         }
 
-        private void OnScanStatusChanged(object? sender, string status)
+        private async void OnScanStatusChanged(object? sender, string status)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            if (Application.Current?.Dispatcher != null)
             {
-                StatusMessage = status;
-            });
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    StatusMessage = status;
+                });
+            }
         }
 
         private void OnScanProgressChanged(object? sender, double progress)
@@ -204,7 +257,6 @@ namespace NetWatch.Desktop.ViewModels
             // Можно показывать тосты или обновлять счетчик уведомлений
         }
 
-        // Свойство для привязки в UI (например, для ProgressBar)
         public bool IsNotScanning => !IsScanning;
     }
 }

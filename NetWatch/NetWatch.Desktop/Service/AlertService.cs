@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore; // Добавьте эту директиву
+﻿using Microsoft.EntityFrameworkCore;
 using NetWatch.DAL;
-using NetWatch.Model;
 using NetWatch.Model.Entities;
 using NetWatch.Model.Enums;
 using NetWatch.Model.Interfaces;
@@ -24,7 +23,6 @@ namespace NetWatch.Desktop.Service
         {
             try
             {
-                // Проверяем наличие устройства, если указан DeviceId
                 if (alert.DeviceId.HasValue)
                 {
                     var deviceExists = await _deviceRepository.GetByIdAsync(alert.DeviceId.Value) != null;
@@ -40,7 +38,6 @@ namespace NetWatch.Desktop.Service
             }
             catch (Exception ex)
             {
-                // Логирование ошибки
                 Console.WriteLine($"Error creating alert: {ex.Message}");
                 throw;
             }
@@ -131,7 +128,7 @@ namespace NetWatch.Desktop.Service
                 .ToListAsync();
         }
 
-        public async Task<List<Alert>> GetDeviceAlertsAsync(Guid deviceId) // Изменено на Guid
+        public async Task<List<Alert>> GetDeviceAlertsAsync(Guid deviceId)
         {
             return await _context.Alerts
                 .Where(a => a.DeviceId == deviceId)
@@ -140,7 +137,7 @@ namespace NetWatch.Desktop.Service
                 .ToListAsync();
         }
 
-        public async Task MarkAlertAsReadAsync(Guid alertId) // Изменено на Guid
+        public async Task MarkAlertAsReadAsync(Guid alertId)
         {
             var alert = await _context.Alerts.FindAsync(alertId);
             if (alert != null)
@@ -164,7 +161,7 @@ namespace NetWatch.Desktop.Service
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAlertAsync(Guid alertId) // Изменено на Guid
+        public async Task DeleteAlertAsync(Guid alertId)
         {
             var alert = await _context.Alerts.FindAsync(alertId);
             if (alert != null)
@@ -196,8 +193,6 @@ namespace NetWatch.Desktop.Service
             _context.Alerts.RemoveRange(allAlerts);
             await _context.SaveChangesAsync();
         }
-
-        // Дополнительные методы для удобства
 
         public async Task CreateScanCompletedAlertAsync(int devicesFound)
         {
