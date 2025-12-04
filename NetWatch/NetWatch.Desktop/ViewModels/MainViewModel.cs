@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using NetWatch.Model;
+using NetWatch.Model.Entities;
 using System.Collections.ObjectModel;
 
 namespace NetWatch.Desktop.ViewModels

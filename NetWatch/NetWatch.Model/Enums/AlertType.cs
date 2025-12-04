@@ -1,4 +1,4 @@
-﻿namespace NetWatch.Model
+﻿namespace NetWatch.Model.Enums
 {
     public enum AlertType
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetWatch.Model;
+using NetWatch.Model.Entities;
 
 namespace NetWatch.DAL
 {

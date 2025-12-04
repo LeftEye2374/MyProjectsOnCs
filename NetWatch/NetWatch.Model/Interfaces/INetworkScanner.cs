@@ -1,4 +1,6 @@
-﻿namespace NetWatch.Model.Interfaces
+﻿using NetWatch.Model.Entities;
+
+namespace NetWatch.Model.Interfaces
 {
     public interface INetworkScanner
     {

@@ -1,4 +1,4 @@
-﻿namespace NetWatch.Model
+﻿namespace NetWatch.Model.Entities
 {
     public class NetworkScanSession : BaseEntity
     {

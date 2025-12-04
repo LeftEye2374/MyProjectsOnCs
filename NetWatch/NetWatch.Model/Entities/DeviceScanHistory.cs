@@ -1,4 +1,6 @@
-﻿namespace NetWatch.Model
+﻿using NetWatch.Model.Enums;
+
+namespace NetWatch.Model.Entities
 {
     public class DeviceScanHistory : BaseEntity
     {

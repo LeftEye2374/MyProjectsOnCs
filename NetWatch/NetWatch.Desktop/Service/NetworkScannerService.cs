@@ -3,7 +3,8 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using NetWatch.Model;
+using NetWatch.Model.Entities;
+using NetWatch.Model.Enums;
 using NetWatch.Model.Interfaces;
 
 namespace NetWatch.Desktop.Services
