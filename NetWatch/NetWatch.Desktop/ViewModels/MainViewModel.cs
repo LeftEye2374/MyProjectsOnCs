@@ -24,6 +24,7 @@ namespace NetWatch.Desktop.ViewModels
 
         public bool IsNotScanning => !IsScanning;
 
+
         [RelayCommand]
         private async Task StartScanAsync()
         {
