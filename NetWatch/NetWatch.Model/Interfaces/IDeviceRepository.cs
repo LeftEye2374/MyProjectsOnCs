@@ -7,15 +7,15 @@ namespace NetWatch.Model.Interfaces
     {
         IQueryable<NetworkDevice> GetAll();
         IQueryable<NetworkDevice> GetAllAsNoTracking();
-        Task<NetworkDevice?> GetByIdAsync(int id);
+        Task<NetworkDevice?> GetByIdAsync(Guid id); 
         Task<NetworkDevice?> GetByIpAddressAsync(string ipAddress);
         Task<NetworkDevice?> GetByMacAddressAsync(string macAddress);
         Task AddAsync(NetworkDevice device);
         Task AddRangeAsync(IEnumerable<NetworkDevice> devices);
         Task UpdateAsync(NetworkDevice device);
         Task UpdateRangeAsync(IEnumerable<NetworkDevice> devices);
-        Task DeleteAsync(int id);
-        Task DeleteRangeAsync(IEnumerable<int> ids);
+        Task DeleteAsync(Guid id);
+        Task DeleteRangeAsync(IEnumerable<Guid> ids); 
         Task<bool> ExistsByIpAsync(string ipAddress);
         Task<bool> ExistsByMacAsync(string macAddress);
         Task<List<NetworkDevice>> GetByStatusAsync(NetStatus status);

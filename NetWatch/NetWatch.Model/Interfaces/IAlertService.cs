@@ -14,10 +14,10 @@ namespace NetWatch.Model.Interfaces
         Task CreateUnauthorizedDeviceAlertAsync(NetworkDevice device);
         Task<List<Alert>> GetUnreadAlertsAsync();
         Task<List<Alert>> GetAllAlertsAsync(int skip = 0, int take = 50);
-        Task<List<Alert>> GetDeviceAlertsAsync(int deviceId);
-        Task MarkAlertAsReadAsync(int alertId);
+        Task<List<Alert>> GetDeviceAlertsAsync(Guid deviceId);
+        Task MarkAlertAsReadAsync(Guid alertId);
         Task MarkAllAlertsAsReadAsync();
-        Task DeleteAlertAsync(int alertId);
+        Task DeleteAlertAsync(Guid alertId);
         Task DeleteReadAlertsAsync();
         Task<int> GetUnreadAlertCountAsync();
         Task ClearAllAlertsAsync();

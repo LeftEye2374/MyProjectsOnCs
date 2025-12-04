@@ -3,38 +3,23 @@ using NetWatch.Model.Entities;
 
 namespace NetWatch.DAL
 {
-    public class SqlDbContext : DbContext
+    public partial class SqlDbContext : DbContext
     {
         public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
         {
         }
 
-        public DbSet<Alert> Alerts { get; set; } = null!;
-        public DbSet<DeviceScanHistory> DeviceScanHistories { get; set; } = null!;
-        public DbSet<NetworkScanSession> NetworkScanSessions { get; set; } = null!;
-        public DbSet<NetworkDevice> NetworkDevices { get; set; } = null!;
+        public DbSet<Alert> Alerts { get; set; }
+        public DbSet<DeviceScanHistory> DeviceScanHistories { get; set; }
+        public DbSet<NetworkScanSession> NetworkScanSessions { get; set; }
+        public DbSet<NetworkDevice> NetworkDevices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<NetworkDevice>()
-                .HasMany(d => d.ScanHistory)
-                .WithOne(h => h.Device)
-                .HasForeignKey(h => h.DeviceId)
-                .OnDelete(DeleteBehavior.Cascade); 
-
-            modelBuilder.Entity<NetworkDevice>()
-                .HasMany(d => d.Alerts)
-                .WithOne(a => a.Device)
-                .HasForeignKey(a => a.DeviceId)
-                .OnDelete(DeleteBehavior.Cascade); 
-
-            modelBuilder.Entity<NetworkScanSession>()
-                .HasMany(s => s.DeviceScanHistories)
-                .WithOne(h => h.ScanSession)
-                .HasForeignKey(h => h.ScanSessionId)
-                .OnDelete(DeleteBehavior.Cascade); 
+                .HasKey(d => d.Id);
 
             modelBuilder.Entity<NetworkDevice>()
                 .HasIndex(d => d.IpAddress)
@@ -45,10 +30,31 @@ namespace NetWatch.DAL
                 .IsUnique();
 
             modelBuilder.Entity<Alert>()
-                .HasIndex(a => a.CreatedAt);
+                .HasKey(a => a.Id);
+
+            modelBuilder.Entity<Alert>()
+                .HasOne(a => a.Device)
+                .WithMany(d => d.Alerts)
+                .HasForeignKey(a => a.DeviceId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<NetworkScanSession>()
+                .HasKey(s => s.Id);
 
             modelBuilder.Entity<DeviceScanHistory>()
-                .HasIndex(h => h.ScanTimestamp);
+                .HasKey(h => h.Id);
+
+            modelBuilder.Entity<DeviceScanHistory>()
+                .HasOne(h => h.Device)
+                .WithMany(d => d.ScanHistory)
+                .HasForeignKey(h => h.DeviceId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<DeviceScanHistory>()
+                .HasOne(h => h.ScanSession)
+                .WithMany(s => s.DeviceScanHistories)
+                .HasForeignKey(h => h.ScanSessionId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

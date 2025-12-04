@@ -6,13 +6,13 @@ namespace NetWatch.Model.Interfaces
     public interface IDeviceService
     {
         Task<List<NetworkDevice>> GetAllDevicesAsync();
-        Task<NetworkDevice?> GetDeviceByIdAsync(int id);
+        Task<NetworkDevice?> GetDeviceByIdAsync(Guid id);
         Task<NetworkDevice?> GetDeviceByIpAsync(string ipAddress);
         Task AddOrUpdateDeviceAsync(NetworkDevice device);
         Task AddOrUpdateDevicesAsync(List<NetworkDevice> devices);
-        Task DeleteDeviceAsync(int id);
-        Task UpdateDeviceStatusAsync(int deviceId, NetStatus status);
-        Task MarkAsTrustedAsync(int deviceId, bool isTrusted);
+        Task DeleteDeviceAsync(Guid id);
+        Task UpdateDeviceStatusAsync(Guid deviceId, NetStatus status);
+        Task MarkAsTrustedAsync(Guid deviceId, bool isTrusted);
         Task<List<NetworkDevice>> SearchDevicesAsync(string searchTerm);
         Task<List<NetworkDevice>> GetDevicesByTypeAsync(DeviceType deviceType);
         Task<DeviceStatistics> GetDeviceStatisticsAsync();

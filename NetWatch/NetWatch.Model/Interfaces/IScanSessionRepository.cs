@@ -5,14 +5,14 @@ namespace NetWatch.Model.Interfaces
     public interface IScanSessionRepository
     {
         IQueryable<NetworkScanSession> GetAll();
-        Task<NetworkScanSession?> GetByIdAsync(int id);
+        Task<NetworkScanSession?> GetByIdAsync(Guid id);
         Task<NetworkScanSession?> GetLastSessionAsync();
         Task<List<NetworkScanSession>> GetSessionsByDateRangeAsync(DateTime startDate, DateTime endDate);
         Task AddAsync(NetworkScanSession session);
         Task UpdateAsync(NetworkScanSession session);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id);
         Task<ScanSessionStatistics> GetStatisticsAsync();
-        Task<List<DeviceScanHistory>> GetDeviceScanHistoryAsync(int deviceId, int limit = 50);
+        Task<List<DeviceScanHistory>> GetDeviceScanHistoryAsync(Guid deviceId, int limit = 50);
         Task AddDeviceScanHistoryAsync(DeviceScanHistory history);
         Task AddDeviceScanHistoryRangeAsync(IEnumerable<DeviceScanHistory> histories);
         Task<int> CountAsync();
