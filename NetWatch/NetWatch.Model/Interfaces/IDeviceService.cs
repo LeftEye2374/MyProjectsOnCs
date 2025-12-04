@@ -1,6 +1,4 @@
-﻿// NetWatch.Model/Interfaces/IDeviceService.cs
-using NetWatch.Model;
-using NetWatch.Model.Entities;
+﻿using NetWatch.Model.Entities;
 using NetWatch.Model.Enums;
 
 namespace NetWatch.Model.Interfaces
