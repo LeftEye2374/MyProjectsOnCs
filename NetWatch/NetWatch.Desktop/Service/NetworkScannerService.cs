@@ -105,13 +105,10 @@ namespace NetWatch.Desktop.Services
                     device.Status = NetStatus.Online;
                     ScanStatusChanged?.Invoke(this, $"Устройство {ip} онлайн");
 
-                    // Получение имени хоста
                     await GetHostNameAsync(device);
 
-                    // Получение MAC-адреса
                     await GetMacAddressAsync(device);
 
-                    // Определение типа устройства
                     DetermineDeviceType(device);
 
                     return device;
@@ -150,7 +147,10 @@ namespace NetWatch.Desktop.Services
                 var hostEntry = await Dns.GetHostEntryAsync(device.IpAddress);
                 device.HostName = hostEntry.HostName;
             }
-            catch { }
+            catch 
+            {
+                throw new Exception($"HostNameNotFaundException! The host owns {device.ToString} is not found ");
+            }
         }
 
         private async Task GetMacAddressAsync(NetworkDevice device)
@@ -169,7 +169,6 @@ namespace NetWatch.Desktop.Services
             }
             catch { }
 
-            // Определение производителя по MAC
             if (!string.IsNullOrEmpty(device.MACAddress))
             {
                 var oui = device.MACAddress.Replace(":", "").Replace("-", "").Substring(0, 6).ToUpper();

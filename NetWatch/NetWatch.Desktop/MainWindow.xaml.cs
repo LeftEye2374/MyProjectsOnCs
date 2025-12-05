@@ -1,6 +1,8 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using NetWatch.Desktop.Service;
 using NetWatch.Desktop.ViewModels;
+using NetWatch.Model.Entities;
 
 namespace NetWatch.Desktop
 {
@@ -12,16 +14,31 @@ namespace NetWatch.Desktop
         {
             InitializeComponent();
 
+            // Создаем заглушки
             var alertService = new AlertServiceStub();
             var deviceService = new DeviceServiceStub(alertService);
             var networkScanner = new NetworkScannerStub();
 
             _viewModel = new MainViewModel(networkScanner, deviceService, alertService);
+
+            // Устанавливаем DataContext
             DataContext = _viewModel;
 
+            // Инициализация UI
             UpdateUI();
 
-            _viewModel.PropertyChanged += (s, e) => UpdateUI();
+            // Подписка на события ViewModel
+            _viewModel.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(_viewModel.Devices))
+                {
+                    UpdateDevicesGrid();
+                }
+                UpdateUI();
+            };
+
+            // Загружаем устройства сразу
+            UpdateDevicesGrid();
         }
 
         private void UpdateUI()
@@ -30,9 +47,11 @@ namespace NetWatch.Desktop
 
             try
             {
+                // Обновляем текстовые поля
                 StatusText.Text = _viewModel.StatusMessage;
                 DevicesCountText.Text = $"Devices: {_viewModel.DevicesCount}";
 
+                // Обновляем состояние кнопок
                 StartScanButton.IsEnabled = _viewModel.IsNotScanning;
                 RefreshButton.IsEnabled = _viewModel.IsNotScanning;
 
@@ -42,6 +61,7 @@ namespace NetWatch.Desktop
                 DeleteDeviceButton.IsEnabled = hasSelectedDevice;
                 PingDeviceButton.IsEnabled = hasSelectedDevice;
 
+                // Обновляем прогресс-бар
                 if (_viewModel.IsScanning)
                 {
                     ScanProgressBar.Visibility = Visibility.Visible;
@@ -57,7 +77,31 @@ namespace NetWatch.Desktop
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"UI update error: {ex.Message}");
+                StatusText.Text = $"Error: {ex.Message}";
+            }
+        }
+
+        private void UpdateDevicesGrid()
+        {
+            if (_viewModel?.Devices == null) return;
+
+            try
+            {
+                // Устанавливаем источник данных для DataGrid
+                DevicesDataGrid.ItemsSource = _viewModel.Devices;
+            }
+            catch (Exception ex)
+            {
+                StatusText.Text = $"Error updating grid: {ex.Message}";
+            }
+        }
+
+        private void DevicesDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DevicesDataGrid.SelectedItem is NetworkDevice selectedDevice)
+            {
+                _viewModel.SelectedDevice = selectedDevice;
+                UpdateUI();
             }
         }
 
