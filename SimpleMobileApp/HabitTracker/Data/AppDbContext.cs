@@ -37,7 +37,7 @@ namespace HabitTracker.Data
                 entity.Property(e => e.Color)
                     .HasMaxLength(7);              // HEX цвет #RRGGBB
 
-                entity.Property(e => e.IsActive)
+                entity.Property(e => e.isActive)
                     .HasDefaultValue(true);
 
                 entity.HasMany(e => e.HabitLogs)
