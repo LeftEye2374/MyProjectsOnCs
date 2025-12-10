@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  sqlite:
+    image: nouchka/sqlite3:latest
+    container_name: todo-sqlite
+    volumes:
+      - sqlite_data:/root/db
+    ports:
+      - "3306:3306"
+    environment:
+      - SQLITE_DB_DIR=/root/db
+    command: ["sqlite3", "/root/db/todo.db"]

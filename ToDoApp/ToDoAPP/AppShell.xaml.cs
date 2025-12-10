@@ -1,10 +1,13 @@
-﻿namespace ToDoAPP
+﻿
+namespace ToDoAPP
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell() => InitializeComponent();
+
+        private void InitializeComponent()
         {
-            InitializeComponent();
+            throw new NotImplementedException();
         }
     }
 }

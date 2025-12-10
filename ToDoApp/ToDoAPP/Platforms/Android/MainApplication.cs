@@ -1,7 +1,8 @@
 ﻿using Android.App;
 using Android.Runtime;
+using TodoApp;
 
-namespace ToDoAPP
+namespace ToDoAPP.Platforms.Android
 {
     [Application]
     public class MainApplication : MauiApplication
@@ -10,7 +11,6 @@ namespace ToDoAPP
             : base(handle, ownership)
         {
         }
-
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }

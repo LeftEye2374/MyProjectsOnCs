@@ -1,6 +1,8 @@
 ﻿using Foundation;
+using TodoApp;
 
-namespace ToDoAPP
+
+namespace ToDoAPP.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate
