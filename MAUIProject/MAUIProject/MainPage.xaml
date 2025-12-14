@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUIProject.MainPage">
-    <StackLayout Padding="30">
-        <Label Text="{Binding Message}" HorizontalOptions="Center"/>
 
-        <Button Text="Change Text" Command="{Binding ChangeTextCommand}"/>
+    <FlexLayout Direction="Column">
+        <Label Text="Pass generation" FontSize="24" HorizontalOptions="Center"/>
 
-    </StackLayout>
+        <Label Text="Pass Length"/>
+        <Stepper  Minimum="4" Value="{Binding PasswordLegth, Mode=TwoWay}" Maximum="16" Increment="1"/>
+
+        <Label Text="{Binding PasswordLegth}" FontSize="16" />
+
+        <Button Text="Generated password" Command="{Binding GeneratePasswordCommand}"/>
+
+        <Label Text="{Binding FinalResult}" FontSize="16" FontAttributes="Bold"/>
+    </FlexLayout>
 
 </ContentPage>

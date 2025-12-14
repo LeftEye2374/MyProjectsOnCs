@@ -6,12 +6,17 @@ namespace MAUIProject.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string message = "hi, MVVM";
+        private int passwordLegth = 8;
+
+        [ObservableProperty]
+        private string finalResult = "Password will created here";
 
         [RelayCommand]
-        private void ChangeText() 
+        private void GeneratePasswordCommand()
         {
-            Message = "New text";
+            const string chars = "ABCDEFGHJIUOMabcdefg0123456789";
+            Random random = new Random();
+            finalResult = new string(Enumerable.Repeat(chars, passwordLegth).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
