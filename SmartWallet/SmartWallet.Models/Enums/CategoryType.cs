@@ -1,4 +1,4 @@
-﻿namespace SmartWallet.Models
+﻿namespace SmartWallet.Models.Enums
 {
     public enum CategoryType
     {
