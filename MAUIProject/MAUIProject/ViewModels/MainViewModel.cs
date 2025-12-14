@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace MAUIProject.ViewModels
 {
-    internal class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private string message = "hi, MVVM";
+
+        [RelayCommand]
+        private void ChangeText() 
+        {
+            Message = "New text";
+        }
     }
 }

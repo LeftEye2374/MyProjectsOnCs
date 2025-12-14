@@ -2,5 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUIProject.MainPage">
+    <StackLayout Padding="30">
+        <Label Text="{Binding Message}" HorizontalOptions="Center"/>
+
+        <Button Text="Change Text" Command="{Binding ChangeTextCommand}"/>
+
+    </StackLayout>
 
 </ContentPage>
