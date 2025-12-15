@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Project Path="CrabCounterApp.Core/CrabCounterApp.Core.csproj" />
+  <Project Path="CrabCounterApp.DAL/CrabCounterApp.DAL.csproj" />
+  <Project Path="CrabCounterApp.Mobile/CrabCounterApp.Mobile.csproj" />
+  <Project Path="CrabCounterApp.Models/CrabCounterApp.Models.csproj" />
+</Solution>

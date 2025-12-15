@@ -1,18 +1,18 @@
 ﻿using CrabCounterApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrabCounterApp.DAL
+namespace CrabCounterApp.SqliteDbContext
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<CrabCount> CrabCounts { get; set; }
+        public DbSet<Autorization> Autorizations { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CrabCount>().HasKey(e => e.Id);
-            modelBuilder.Entity<CrabCount>().HasIndex(e => e.Id).IsUnique();
+            modelBuilder.Entity<Autorization>().HasKey(e => e.Id);
+            modelBuilder.Entity<Autorization>().HasIndex(e => e.Id).IsUnique();
         }
     }
 }

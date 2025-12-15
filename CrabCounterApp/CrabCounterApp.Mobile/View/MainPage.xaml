@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="CrabCounterApp.Mobile.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:CrabCounterApp.Core.ViewModels"
+             x:DataType="viewmodels:MainViewModel"
+             BackgroundColor="#F0F8FF">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30" VerticalOptions="Center">
+
+
+            <Label Text="Крабики в ведре" FontSize="28"  FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Grid ColumnDefinitions="*,Auto,Auto,*" RowDefinitions="Auto" Padding="20">
+                <Label Grid.Column="1" Grid.Row="0" 
+                       Text="{Binding CrabCount}"
+                       FontSize="48" FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="#E74C3C"/>
+
+                <Button Grid.Column="0" Grid.Row="0" 
+                        Text="-" 
+                        Command="{Binding DecreaseCommand}"
+                        BackgroundColor="#E74C3C"
+                        TextColor="White"
+                        CornerRadius="25"
+                        WidthRequest="60" HeightRequest="60"
+                        FontSize="24"
+                        FontAttributes="Bold"/>
+
+                <Button Grid.Column="2" Grid.Row="0" 
+                        Text="+" 
+                        Command="{Binding IncreaseCommand}"
+                        BackgroundColor="#27AE60"
+                        TextColor="White"
+                        CornerRadius="25"
+                        WidthRequest="60" HeightRequest="60"
+                        FontSize="24"
+                        FontAttributes="Bold"/>
+            </Grid>
+
+            <Button Text="Сохранить" 
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsSaveEnabled}"
+                    BackgroundColor="{Binding IsSaveEnabled, Converter={StaticResource InverseBoolConverter}}"
+                    TextColor="White"
+                    CornerRadius="15"
+                    FontSize="18"
+                    SemanticProperties.HeadingLevel="Level2"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
