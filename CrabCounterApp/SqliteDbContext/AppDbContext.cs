@@ -1,11 +1,11 @@
-﻿using CrabCounter.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using CrabCounter.Models;
 
-namespace SqliteDbContext
+namespace CrabCounter.SqliteDbContext
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<CrabCounter> crabs { get; set; }
+        public DbSet<Counter> crabs { get; set; }
 
         public AppDbContext()
         {

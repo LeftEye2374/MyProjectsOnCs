@@ -1,9 +1,10 @@
-﻿using System.ComponentModel;
+﻿
+using CrabCounter.SqliteDbContext;
 
 namespace CrabCounter.Mobile.ViewModels
 {
     internal class MainViewModel 
     {
-        public readonly  _context; 
+        public readonly AppDbContext _context;
     }
 }

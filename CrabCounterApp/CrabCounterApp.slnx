@@ -1,6 +1,5 @@
 <Solution>
-  <Project Path="CrabCounterApp.Core/CrabCounterApp.Core.csproj" />
-  <Project Path="CrabCounterApp.DAL/CrabCounterApp.DAL.csproj" />
-  <Project Path="CrabCounterApp.Mobile/CrabCounterApp.Mobile.csproj" />
-  <Project Path="CrabCounterApp.Models/CrabCounterApp.Models.csproj" />
+  <Project Path="CrabCounter.Mobile/CrabCounter.Mobile.csproj" Id="3ec94682-ce34-44fe-8858-1d733aad5be0" />
+  <Project Path="CrabCounter.Models/CrabCounter.Models.csproj" Id="d4e31c05-5012-4b56-b3d5-aeeacdeec86f" />
+  <Project Path="SqliteDbContext/CrabCounter.SqliteDbContext.csproj" Id="de36dec6-eda5-45a2-bd0b-7f9ba0f93aca" />
 </Solution>
