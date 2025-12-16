@@ -14,8 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CrabCounterApp.Models\CrabCounterApp.Models.csproj" />
-  </ItemGroup>
-
 </Project>
