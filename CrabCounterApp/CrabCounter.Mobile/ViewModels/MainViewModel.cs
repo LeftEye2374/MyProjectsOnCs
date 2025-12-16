@@ -17,7 +17,7 @@ namespace CrabCounter.Mobile.ViewModels
         [RelayCommand(CanExecute = nameof(CanLogin))]
         private async Task Login()
         {
-            await Shell.Current.GoToAsync("//NextPage");
+            await Shell.Current.GoToAsync("SecondPage");
         }
 
         private bool CanLogin()

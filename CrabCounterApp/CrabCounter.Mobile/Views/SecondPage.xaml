@@ -1,7 +1,33 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:CrabCounter.Mobile.ViewModels" x:DataType="viewmodels:SecondPageViewModel"
              x:Class="CrabCounter.Mobile.Views.SecondPage"
              Title="SecondPage">
-        
+    <StackLayout>
+
+        <Label Text="КРАБИКИ В ВЕДРЕ" FontSize="24" HorizontalOptions="Center"/>
+
+        <Label Text="Число Грэма — это невероятно огромное число, которое появилось как верхняя" FontSize="12" HorizontalOptions="Center"/>
+        <Label Text="граница для решения задачи в теории Рамсея. Оно настолько велико, что" FontSize="12" HorizontalOptions="Center"/>
+        <Label Text="его невозможно записать в десятичной системе счисления; для его описания" FontSize="12" HorizontalOptions="Center"/>
+        <Label Text="используется особая нотация Кнута с применением башен степеней. Это число" FontSize="12" HorizontalOptions="Center"/>
+        <Label Text="больше гугола (10^100) и гуголгоплекса в невообразимое количество раз, а вся" FontSize="12" HorizontalOptions="Center"/>
+        <Label Text="наблюдаемая Вселенная слишком мала, чтобы вместить его запись.  " FontSize="12" HorizontalOptions="Center"/>
+
+        <Grid ColumnDefinitions="Auto,Auto,Auto" 
+                      HorizontalOptions="Center"
+                      ColumnSpacing="20">
+
+            <Button Text="-"  FontSize="32" WidthRequest="60" HeightRequest="60" 
+                    CornerRadius="30" Grid.Column="0" Command="{Binding DecrementCommand}"/>
+
+            <Label Text="{Binding CrabCount}" FontSize="48" FontAttributes="Bold" VerticalOptions="Center"
+                           HorizontalOptions="Center" WidthRequest="100" HorizontalTextAlignment="Center" Grid.Column="1"/>
+
+            <Button Text="+" FontSize="32" WidthRequest="60" HeightRequest="60"
+                            CornerRadius="30"  Grid.Column="2" Command="{Binding IncrementCommand}"/>
+        </Grid>
+
+        <Button Text="Сохранить" FontSize="20" WidthRequest="250"
+                        HeightRequest="50" HorizontalOptions="Center" Command="{Binding SaveCommand}"/>
+    </StackLayout>        
 </ContentPage>

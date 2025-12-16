@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CrabCounter.Mobile.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CrabCounter.Mobile
 {
@@ -7,6 +8,7 @@ namespace CrabCounter.Mobile
         public App()
         {
             InitializeComponent();
+            Routing.RegisterRoute("SecondPage", typeof(SecondPage));
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
