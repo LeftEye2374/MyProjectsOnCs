@@ -4,9 +4,9 @@ namespace CrabCounter.Mobile.Views;
 
 public partial class SecondPage : ContentPage
 {
-	public SecondPage()
-	{
-		InitializeComponent();
-		BindingContext = new SecondPageViewModel();
-	}
+    public SecondPage(SecondPageViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 }

@@ -8,7 +8,7 @@ namespace CrabCounter.Mobile
         public App()
         {
             InitializeComponent();
-            Routing.RegisterRoute("SecondPage", typeof(SecondPage));
+            Routing.RegisterRoute(nameof(SecondPage), typeof(SecondPage));
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

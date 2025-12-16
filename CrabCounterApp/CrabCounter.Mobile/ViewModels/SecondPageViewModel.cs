@@ -1,45 +1,43 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CrabCounter.SqliteDbContext;
 
 namespace CrabCounter.Mobile.ViewModels
 {
     public partial class SecondPageViewModel : ObservableObject
     {
-        private readonly AppDbContext _context;
+        private const string CrabCountKey = "CrabCount";
 
         [ObservableProperty]
-        private string count;
+        private int crabCount;  
 
-
-        [RelayCommand]
-        private void increment()
+        public SecondPageViewModel()
         {
-            //count = finalCount++;
-            //return count;
+            CrabCount = Preferences.Get(CrabCountKey, 0);
         }
 
         [RelayCommand]
-        private void decrement()
+        private void Increment()
         {
-            //count = finalCount--;
-            //return count;
+            if (CrabCount < 100)
+            {
+                CrabCount++;  
+            }
         }
 
         [RelayCommand]
-        private void save()
+        private void Decrement()
         {
-
+            if (CrabCount > 0)
+            {
+                CrabCount--;  
+            }
         }
 
-
-        private int getCount()
+        [RelayCommand]
+        private async Task Save()
         {
-            //_context = 
-
-            return 1;
+            Preferences.Set(CrabCountKey, CrabCount);
+            await Application.Current.MainPage.DisplayAlert("Успешно", $"Сохранено: {CrabCount} крабиков", "OK");
         }
-
-
     }
 }
