@@ -1,8 +1,7 @@
 ﻿namespace CrabCounter.Models
 {
-    public class Counter
+    public class Counter : ModelBase
     {
-        public Guid Id { get; set; }
-        public int Count { get; set; } = 50;
+        public int Count { get; set; }
     }
 }

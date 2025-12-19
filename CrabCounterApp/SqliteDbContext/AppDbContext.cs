@@ -5,11 +5,20 @@ namespace CrabCounter.SqliteDbContext
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Counter> crabs { get; set; }
+        public DbSet<Counter> Crabs { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
         {
-            Database.EnsureCreated();
+        }
+
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        {
+            modelBuilder.Entity<Counter>();
+            modelBuilder.Entity<User>();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

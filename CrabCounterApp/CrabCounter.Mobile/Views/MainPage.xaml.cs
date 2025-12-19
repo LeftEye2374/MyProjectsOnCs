@@ -1,6 +1,6 @@
 ﻿using CrabCounter.Mobile.ViewModels;
 
-namespace CrabCounter.Mobile
+namespace CrabCounter.Mobile.Views
 {
     public partial class MainPage : ContentPage
     {
