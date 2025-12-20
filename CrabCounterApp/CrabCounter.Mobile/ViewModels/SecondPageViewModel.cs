@@ -50,7 +50,7 @@ namespace CrabCounter.Mobile.ViewModels
         private async Task Save()
         {
             await _context.SaveChangesAsync();
-            await Application.Current.MainPage.DisplayAlert("Успешно", $"Сохранено: {CrabCount} крабиков", "OK");
+            await Application.Current.MainPage.DisplayAlertAsync("Успешно", $"Сохранено: {CrabCount} крабиков", "OK");
         }
     }
 }
