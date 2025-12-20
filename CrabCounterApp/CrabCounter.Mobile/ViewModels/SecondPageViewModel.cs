@@ -17,7 +17,7 @@ namespace CrabCounter.Mobile.ViewModels
         {
             _context = context;
             currentNum = context.Crabs.FirstOrDefault();
-            crabCount = currentNum?.Count ?? 90;
+            crabCount = currentNum?.Count ?? 50;
         }
 
         [RelayCommand]
