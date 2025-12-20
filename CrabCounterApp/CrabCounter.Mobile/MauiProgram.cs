@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using CrabCounter.Mobile.ViewModels;
 using CrabCounter.Mobile.Views;
 using CommunityToolkit.Maui;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CrabCounter.Mobile
 {
@@ -35,7 +34,6 @@ namespace CrabCounter.Mobile
 #endif
             var app = builder.Build();
 
-            // Создаём scope и пересоздаём БД при старте
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
