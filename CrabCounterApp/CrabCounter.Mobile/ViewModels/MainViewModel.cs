@@ -13,7 +13,7 @@ namespace CrabCounter.Mobile.ViewModels
         [ObservableProperty]
         private UserWrapper? _userWrapper;
 
-        public MainViewModel(AppDbContext context)
+        public MainViewModel()
         {
             UserWrapper = new UserWrapper(new User());
         }

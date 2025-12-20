@@ -1,20 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CrabCounter.Models;
+using CrabCounter.SqliteDbContext;
 
 namespace CrabCounter.Mobile.ViewModels
 {
     public partial class SecondPageViewModel : ObservableObject
     {
-        private 
-
-        private const string CrabCountKey = "CrabCount";
+        private readonly AppDbContext _context;
 
         [ObservableProperty]
-        private int crabCount;  
+        private int crabCount;
+        private Counter currentNum;
 
-        public SecondPageViewModel()
+        public SecondPageViewModel(AppDbContext context)
         {
-            CrabCount = Preferences.Get(CrabCountKey, 0);
+            _context = context;
+            currentNum = context.Crabs.FirstOrDefault();
+            crabCount = currentNum?.Count ?? 90;
         }
 
         [RelayCommand]
@@ -22,7 +25,11 @@ namespace CrabCounter.Mobile.ViewModels
         {
             if (CrabCount < 100)
             {
-                CrabCount++;  
+                CrabCount++; 
+                if(currentNum != null)
+                {
+                    currentNum.Count = crabCount;
+                }
             }
         }
 
@@ -31,14 +38,18 @@ namespace CrabCounter.Mobile.ViewModels
         {
             if (CrabCount > 0)
             {
-                CrabCount--;  
+                CrabCount--;
+                if (currentNum != null)
+                {
+                    currentNum.Count = crabCount;
+                }
             }
         }
 
         [RelayCommand]
         private async Task Save()
         {
-            Preferences.Set(CrabCountKey, CrabCount);
+            await _context.SaveChangesAsync();
             await Application.Current.MainPage.DisplayAlert("Успешно", $"Сохранено: {CrabCount} крабиков", "OK");
         }
     }
