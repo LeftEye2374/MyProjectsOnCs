@@ -22,7 +22,7 @@
             <Button Text="-" FontSize="32" WidthRequest="60" HeightRequest="60" 
                     CornerRadius="30" Grid.Column="0" Command="{Binding DecrementCommand}"/>
 
-            <Label Text="{Binding CrabCount}" 
+            <Label Text="{Binding Wrapper.Number}" 
                    FontSize="48" 
                    FontAttributes="Bold" 
                    VerticalOptions="Center" 

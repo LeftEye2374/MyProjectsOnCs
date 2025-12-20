@@ -2,6 +2,6 @@
 {
     public class Counter : ModelBase
     {
-        public int Count { get; set; }
+        public int Number { get; set; } = 50;
     }
 }

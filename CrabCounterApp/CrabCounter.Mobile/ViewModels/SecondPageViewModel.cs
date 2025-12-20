@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CrabCounter.Mobile.Wrappers;
 using CrabCounter.Models;
 using CrabCounter.SqliteDbContext;
 
@@ -10,47 +11,44 @@ namespace CrabCounter.Mobile.ViewModels
         private readonly AppDbContext _context;
 
         [ObservableProperty]
-        private int crabCount;
-        private Counter currentNum;
+        private Counter _counter;
+
+        [ObservableProperty]
+        private CounterWrapper _wrapper;
 
         public SecondPageViewModel(AppDbContext context)
         {
             _context = context;
-            currentNum = context.Crabs.FirstOrDefault();
-            crabCount = currentNum?.Count ?? 50;
+            if (context.Crabs.Any()) Counter = context.Crabs.FirstOrDefault();
+            else Counter = new Counter { Number = 50 };
+            Wrapper = new CounterWrapper(Counter);
         }
 
         [RelayCommand]
         private void Increment()
         {
-            if (CrabCount < 100)
+            if (Wrapper.Number < 100)
             {
-                CrabCount++; 
-                if(currentNum != null)
-                {
-                    currentNum.Count = crabCount;
-                }
+                Wrapper.Number++; 
             }
         }
 
         [RelayCommand]
         private void Decrement()
         {
-            if (CrabCount > 0)
+            if (Wrapper.Number > 0)
             {
-                CrabCount--;
-                if (currentNum != null)
-                {
-                    currentNum.Count = crabCount;
-                }
+                Wrapper.Number--;
             }
         }
 
         [RelayCommand]
         private async Task Save()
         {
+            Counter.Number = Wrapper.Number;
+            _context.Crabs.Update(Counter);
             await _context.SaveChangesAsync();
-            await Application.Current.MainPage.DisplayAlertAsync("Успешно", $"Сохранено: {CrabCount} крабиков", "OK");
+            await Application.Current.MainPage.DisplayAlertAsync("Успешно", $"Сохранено: {Wrapper.Number} крабиков", "OK");
         }
     }
 }
