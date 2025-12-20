@@ -5,6 +5,8 @@ namespace CrabCounter.Mobile.ViewModels
 {
     public partial class SecondPageViewModel : ObservableObject
     {
+        private 
+
         private const string CrabCountKey = "CrabCount";
 
         [ObservableProperty]

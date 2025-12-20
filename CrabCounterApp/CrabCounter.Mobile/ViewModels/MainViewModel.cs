@@ -9,27 +9,34 @@ namespace CrabCounter.Mobile.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        private readonly AppDbContext _context;
-
-        [ObservableProperty]
-        private User? _user;
 
         [ObservableProperty]
         private UserWrapper? _userWrapper;
 
         public MainViewModel(AppDbContext context)
         {
-            _context = context;
-
-            _userWrapper = new UserWrapper(User);
-
-            _userWrapper.PropertyChanged += OnUserWrapperPropertyChanged;
+            UserWrapper = new UserWrapper(new User());
         }
 
         [RelayCommand(CanExecute = nameof(CanLogin))]
         private async Task LoginAsync()
         {
             await Shell.Current.GoToAsync("SecondPage");
+        }
+
+        partial void OnUserWrapperChanged(UserWrapper? oldValue, UserWrapper? newValue)
+        {
+            if (oldValue != null)
+            {
+                oldValue.PropertyChanged -= OnUserWrapperPropertyChanged;
+            }
+
+            if (newValue != null)
+            {
+                newValue.PropertyChanged += OnUserWrapperPropertyChanged;
+            }
+
+            LoginCommand.NotifyCanExecuteChanged();
         }
 
         private void OnUserWrapperPropertyChanged(object? sender, PropertyChangedEventArgs e)
