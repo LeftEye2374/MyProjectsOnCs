@@ -1,21 +1,29 @@
-﻿using WeatherApp.Models.ApiModels;
+﻿using System.Net.Http.Json;
+using WeatherApp.Models.ApiModels;
 
 namespace WeatherApp.Mobile.Services
 {
     public class WeatherService : IWeatherService
     {
         private readonly HttpClient _httpClient;
-        private const string ApiKey = "";
-        private const string BaseUrl = "";
+        private const string ApiKey = "4e4bd609f8c87462328403e3d7a516b0";
+        private const string BaseUrl = $"https://api.openweathermap.org/data/2.5/weather?lat=45.03&lon=38.98&appid={ApiKey}";
 
-        public Task<WeatherResponse> GetWeatherAsync(string city)
+        public WeatherService(HttpClient httpClient)
         {
-            throw new NotImplementedException();
+            _httpClient = httpClient;
         }
 
-        public Task<WeatherResponse> GetWeatherByCoordinatesAsync(double lat, double lon)
+        public async Task<WeatherResponse> GetWeatherAsync(string city)
         {
-            throw new NotImplementedException();
+            var url = $"{BaseUrl}/weather?q={city}&appid={ApiKey}&units=metric&lang=ru";
+            return await _httpClient.GetFromJsonAsync<WeatherResponse>(url); 
+        }
+
+        public async Task<WeatherResponse> GetWeatherByCoordinatesAsync(double lat, double lon)
+        {
+            var url = $"{BaseUrl}/weather?lat={lat}&lon={lon}&appid={ApiKey}&units=metric&lang=ru";
+            return await _httpClient.GetFromJsonAsync<WeatherResponse>(url);
         }
     }
 }
