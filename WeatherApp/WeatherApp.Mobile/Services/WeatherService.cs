@@ -7,7 +7,7 @@ namespace WeatherApp.Mobile.Services
     {
         private readonly HttpClient _httpClient;
         private const string ApiKey = "4e4bd609f8c87462328403e3d7a516b0";
-        private const string BaseUrl = $"https://api.openweathermap.org/data/2.5/weather?lat=45.03&lon=38.98&appid={ApiKey}";
+        private const string BaseUrl = "https://api.openweathermap.org/data/2.5";
 
         public WeatherService(HttpClient httpClient)
         {
@@ -17,7 +17,7 @@ namespace WeatherApp.Mobile.Services
         public async Task<WeatherResponse> GetWeatherAsync(string city)
         {
             var url = $"{BaseUrl}/weather?q={city}&appid={ApiKey}&units=metric&lang=ru";
-            return await _httpClient.GetFromJsonAsync<WeatherResponse>(url); 
+            return await _httpClient.GetFromJsonAsync<WeatherResponse>(url);
         }
 
         public async Task<WeatherResponse> GetWeatherByCoordinatesAsync(double lat, double lon)
