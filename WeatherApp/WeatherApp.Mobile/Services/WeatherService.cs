@@ -19,11 +19,5 @@ namespace WeatherApp.Mobile.Services
             var url = $"{BaseUrl}/weather?q={city}&appid={ApiKey}&units=metric&lang=ru";
             return await _httpClient.GetFromJsonAsync<WeatherResponse>(url);
         }
-
-        public async Task<WeatherResponse> GetWeatherByCoordinatesAsync(double lat, double lon)
-        {
-            var url = $"{BaseUrl}/weather?lat={lat}&lon={lon}&appid={ApiKey}&units=metric&lang=ru";
-            return await _httpClient.GetFromJsonAsync<WeatherResponse>(url);
-        }
     }
 }
