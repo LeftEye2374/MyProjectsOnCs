@@ -64,7 +64,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\AppDbContext\WeatherApp.AppDbContext.csproj" />
 	  <ProjectReference Include="..\WeatherApp.Models\WeatherApp.Models.csproj" />
 	</ItemGroup>
 

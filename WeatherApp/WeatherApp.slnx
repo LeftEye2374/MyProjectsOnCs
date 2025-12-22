@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="AppDbContext/WeatherApp.AppDbContext.csproj" />
   <Project Path="WeatherApp.Mobile/WeatherApp.Mobile.csproj" Id="72fb65ca-82a9-41dc-9677-90c3154a554c">
     <Deploy Solution="Debug|*" />
   </Project>
