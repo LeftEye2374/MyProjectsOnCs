@@ -1,1 +1,3 @@
-<Solution />
+<Solution>
+  <Project Path="WeatherApp.Models/WeatherApp.Models.csproj" />
+</Solution>
