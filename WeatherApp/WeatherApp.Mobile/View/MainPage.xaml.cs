@@ -1,6 +1,6 @@
-﻿using WeatherApp.Mobile.ViewModel;
+﻿using WeatherApp.Mobile.ViewModels;
 
-namespace WeatherApp.Mobile
+namespace WeatherApp.Mobile.Views
 {
     public partial class MainPage : ContentPage
     {

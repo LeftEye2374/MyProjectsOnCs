@@ -3,7 +3,8 @@ using CommunityToolkit.Maui;
 using AppDbContext;
 using Microsoft.EntityFrameworkCore;
 using WeatherApp.Mobile.Services;
-using WeatherApp.Mobile.ViewModel;
+using WeatherApp.Mobile.ViewModels;
+using WeatherApp.Mobile.Views;
 
 namespace WeatherApp.Mobile
 {
@@ -22,7 +23,7 @@ namespace WeatherApp.Mobile
             builder.Services.AddDbContext<SqliteDbContexrt>(options => options.UseSqlite($"Data Source = {DbPath}"));
 
             builder.Services.AddSingleton<HttpClient>();
-            builder.Services.AddSingleton<WeatherService>();
+            builder.Services.AddSingleton<IWeatherService,WeatherService>();
 
             builder.Services.AddTransient<MainPageViewModel>();
 
