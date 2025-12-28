@@ -1,1 +1,4 @@
-<Solution />
+<Solution>
+  <Project Path="StudApp.AppDbContext/StudApp.AppDbContext.csproj" Id="98029d8c-e80c-4220-8bec-89dac4e87b32" />
+  <Project Path="StudApp.Models/StudApp.Models.csproj" Id="6603652d-5461-4190-80d6-418292ef195f" />
+</Solution>

@@ -1,6 +1,6 @@
 ﻿namespace StudApp.Models
 {
-    internal class Report : BaseEntity
+    public class Report : BaseEntity
     {
         public Person Person { get; set; }
         public ContactInfo ContactInfo { get; set; }

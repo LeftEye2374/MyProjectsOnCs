@@ -1,9 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudApp.Models;
+
 
 namespace StudApp.AppDbContext
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
+        public DbSet<Imposter> Imposters  { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

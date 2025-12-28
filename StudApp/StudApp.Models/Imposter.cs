@@ -1,6 +1,6 @@
 ﻿namespace StudApp.Models
 {
-    internal class Imposter : BaseEntity
+    public class Imposter : BaseEntity
     {
         public Person Person { get; set; }
         public ContactInfo ContactInfo { get; set; }
