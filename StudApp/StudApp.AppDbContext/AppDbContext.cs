@@ -23,6 +23,35 @@ namespace StudApp.AppDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.CreatedReports)
+                .WithOne(r => r.CreatedByEmployee)
+                .HasForeignKey(r => r.EmployeeId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Imposter>()
+                .HasMany(i => i.CreatedReports)
+                .WithOne(r => r.CreatedByImposter)
+                .HasForeignKey(r => r.ImposterId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Report>()
+                .HasMany(r => r.Employees)
+                .WithMany(e => e.AssignedReports)
+                .UsingEntity(j => j.ToTable("ReportEmployees"));
+
+            modelBuilder.Entity<Shift>()
+                .HasOne(s => s.Master)
+                .WithMany(e => e.ManagedShifts)
+                .HasForeignKey(s => s.MasterId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Shift>()
+                .HasMany(s => s.Employees)
+                .WithOne(e => e.Shift)
+                .HasForeignKey(e => e.ShiftId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
