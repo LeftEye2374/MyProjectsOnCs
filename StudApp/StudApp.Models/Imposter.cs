@@ -2,8 +2,8 @@
 {
     public class Imposter : BaseEntity
     {
-        public Person Person { get; set; }
+        public Person PersonInfo { get; set; }
         public ContactInfo ContactInfo { get; set; }
-        public ICollection<Report> CreatedReports { get; set; } = new List<Report>();
+        public ICollection<Report> Reports { get; set; } = new List<Report>();
     }
 }

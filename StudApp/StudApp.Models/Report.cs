@@ -2,15 +2,12 @@
 {
     public class Report : BaseEntity
     {
-        public Person Person { get; set; }
+        public Person PersonInfo { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public string Description { get; set; }
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
-        public int? EmployeeId { get; set; }
-        public Employee CreatedByEmployee { get; set; }
-
-        public int? ImposterId { get; set; }
-        public Imposter CreatedByImposter { get; set; }
-
+        public Guid EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+        public Guid ImposterId { get; set; }
+        public Imposter Imposter { get; set; }
     }
 }
