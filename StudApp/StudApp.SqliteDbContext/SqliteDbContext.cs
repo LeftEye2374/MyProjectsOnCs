@@ -3,7 +3,7 @@ using StudApp.Models;
 
 namespace StudApp.AppDbContext
 {
-    internal class SqliteDbContext : DbContext
+    public class SqliteDbContext : DbContext
     {
 
         public DbSet<Imposter> Imposters { get; set; }

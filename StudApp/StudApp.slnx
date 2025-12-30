@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="StudApp.AppDbContext/StudApp.AppDbContext.csproj" Id="98029d8c-e80c-4220-8bec-89dac4e87b32" />
-  <Project Path="StudApp.Mobile/StudApp.Mobile.csproj" Id="80195b78-e4f2-4616-9e29-afe9eda20020" />
+  <Project Path="StudApp.Mobile/StudApp.Mobile.csproj" Id="86d91353-de06-4354-919d-a04be1e87325" />
   <Project Path="StudApp.Models/StudApp.Models.csproj" Id="6603652d-5461-4190-80d6-418292ef195f" />
+  <Project Path="StudApp.SqliteDbContext/StudApp.AppDbContext.csproj" Id="d2498fb1-939b-4dca-a38c-0702a0a14b44" />
 </Solution>
