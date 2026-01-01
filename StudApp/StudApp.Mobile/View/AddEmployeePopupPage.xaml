@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               xmlns:wrappers="clr-namespace:StudApp.Mobile.Wrappers"
+               x:Class="StudApp.Mobile.View.AddEmployeePopupPage"
+               x:DataType="wrappers:EmployeeWrapper">
+
+    <ScrollView>
+        <Grid RowSpacing="10" ColumnSpacing="10" Padding="20">
+            <Grid.RowDefinitions>
+                <!-- ФИО -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <!-- Контакты -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <!-- Остальные -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <!-- Кнопки -->
+            </Grid.RowDefinitions>
+
+            <!-- ФИО -->
+            <Label Grid.Row="0" Grid.Column="0" Text="ФИО:" VerticalOptions="Start"/>
+            <Entry Grid.Row="1" Text="{Binding FirstName}" Placeholder="Имя"/>
+            <Entry Grid.Row="2" Text="{Binding SecondName}" Placeholder="Отчество"/>
+            <Entry Grid.Row="3" Text="{Binding LastName}" Placeholder="Фамилия"/>
+
+            <!-- Контакты -->
+            <Label Grid.Row="4" Grid.Column="0" Text="Контакты:" VerticalOptions="Start"/>
+            <Entry Grid.Row="5" Text="{Binding Phone}" Placeholder="Телефон"/>
+            <Entry Grid.Row="6" Text="{Binding Faculty}" Placeholder="Факультет"/>
+            <Entry Grid.Row="7" Text="{Binding Room}" Placeholder="Комната"/>
+            <Entry Grid.Row="8" Text="{Binding Dormitry, StringFormat='{0}'}" Placeholder="Общежитие" Keyboard="Numeric"/>
+            <Entry Grid.Row="9" Text="{Binding Flor, StringFormat='{0}'}" Placeholder="Этаж" Keyboard="Numeric"/>
+            <Entry Grid.Row="10" Text="{Binding Curs, StringFormat='{0}'}" Placeholder="Курс" Keyboard="Numeric"/>
+
+            <!-- Остальные -->
+            <Entry Grid.Row="11" Text="{Binding Role}" Placeholder="Роль"/>
+            <Entry Grid.Row="12" Text="{Binding Password}" IsPassword="True" Placeholder="Пароль"/>
+
+            <!-- Кнопки -->
+            <Grid Grid.Row="13" ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" Text="Отмена" Command="{Binding CancelCommand}"/>
+                <Button Grid.Column="1" Text="Сохранить" Command="{Binding SaveCommand}"/>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</toolkit:Popup>
