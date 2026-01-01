@@ -8,5 +8,11 @@
         public ICollection<Report> Reports { get; set; } = new List<Report>();
         public Guid ShiftId { get; set; }
         public Shift Shift { get; set; }
+        public string Password { get; set; }
+
+        public Employee()
+        {
+            PersonInfo = new Person(); 
+        }
     }
 }

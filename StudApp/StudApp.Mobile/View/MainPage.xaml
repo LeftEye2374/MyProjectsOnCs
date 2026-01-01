@@ -10,9 +10,9 @@
 
         <Label Text="ВХОД" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center"/>
 
-        <Entry x:Name="LoginEntry" Placeholder="Введите логин" Text="" HorizontalOptions="Center" WidthRequest="300"/>
+        <Entry x:Name="LoginEntry" Placeholder="Введите логин" Text="{Binding EmployeeWrapper.FirstName, Mode=TwoWay}" HorizontalOptions="Center" WidthRequest="300"/>
 
-        <Entry x:Name="PasswordEntry" Placeholder="Введите пароль" Text="" HorizontalOptions="Center" WidthRequest="300"/>
+        <Entry x:Name="PasswordEntry" Placeholder="Введите пароль" Text="{Binding EmployeeWrapper.Password}" HorizontalOptions="Center" WidthRequest="300"/>
 
         <Button x:Name="LoginButton" Text="Войти" FontSize="18" HorizontalOptions="Center" WidthRequest="300" Command="{Binding LoginCommand}"/>
 
