@@ -5,7 +5,6 @@
              Title="ViewPage">
     <Grid RowDefinitions="*, Auto">
 
-        <!-- Центральная часть с информацией о смене -->
         <VerticalStackLayout Grid.Row="0" 
                             VerticalOptions="Center" 
                             HorizontalOptions="Center">
@@ -23,7 +22,6 @@
                    TextColor="{StaticResource Gray600}"/>
         </VerticalStackLayout>
 
-        <!-- Нижняя панель с 5 кнопками -->
         <Grid Grid.Row="1" 
               ColumnDefinitions="*,*,*,*,*"
               BackgroundColor="{StaticResource Gray200}"

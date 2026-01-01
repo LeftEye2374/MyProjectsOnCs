@@ -2,7 +2,7 @@
 {
     public class ContactInfo
     {
-        public string phone {  get; set; }
+        public string Phone {  get; set; }
         public int Dormitry { get; set; }
         public int Flor {  get; set; }
         public string Room { get; set; }

@@ -27,9 +27,11 @@ namespace StudApp.Mobile
 
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<ViewViewModel>();
+            builder.Services.AddSingleton<EmployeesViewModel>();
             
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
+            builder.Services.AddSingleton<EmployeesPage>();
 
             builder.Services.AddSingleton<IShiftService, ShiftService>();
 
