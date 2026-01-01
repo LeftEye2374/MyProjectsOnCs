@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudApp.AppDbContext;
+using StudApp.Mobile.Services;
 using StudApp.Mobile.View;
 using StudApp.Mobile.ViewModel;
 
@@ -29,6 +30,8 @@ namespace StudApp.Mobile
             
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
+
+            builder.Services.AddSingleton<IShiftService, ShiftService>();
 
 
 #if DEBUG
