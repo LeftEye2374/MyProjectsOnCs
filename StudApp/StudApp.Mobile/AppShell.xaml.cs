@@ -10,6 +10,7 @@ namespace StudApp.Mobile
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(ViewPage), typeof(ViewPage));
             Routing.RegisterRoute(nameof(EmployeesPage), typeof(EmployeesPage));
+            Routing.RegisterRoute(nameof(AddEmployeePage), typeof(AddEmployeePage));
         }
     }
 }

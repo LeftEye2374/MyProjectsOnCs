@@ -1,9 +1,10 @@
 ﻿using StudApp.Mobile.Wrappers;
+using StudApp.Models;
 
 namespace StudApp.Mobile.Services
 {
     public interface IEmployeeService
     {
-        Task<EmployeeWrapper?> AddEmployeeAsync();
+        Task<Employee?> AddEmployeeAsync();
     }
 }

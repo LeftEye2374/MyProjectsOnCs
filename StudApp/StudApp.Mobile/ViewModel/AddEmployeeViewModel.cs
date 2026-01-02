@@ -2,8 +2,7 @@
 
 namespace StudApp.Mobile.ViewModel
 {
-    public partial class EmployeesViewModel : ObservableObject
+    public class AddEmployeeViewModel : ObservableObject
     {
-
     }
 }
