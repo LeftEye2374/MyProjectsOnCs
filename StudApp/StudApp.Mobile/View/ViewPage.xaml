@@ -80,7 +80,7 @@
                 <ImageButton Source="employees_icon.png" 
                             WidthRequest="28" 
                             HeightRequest="28"
-                            Command="{Binding EmployeesCommand}"
+                            Command="{Binding EmployeesTableCommand}"
                             BackgroundColor="Transparent"/>
                 <Label Text="Сотрудники" 
                        FontSize="10" 

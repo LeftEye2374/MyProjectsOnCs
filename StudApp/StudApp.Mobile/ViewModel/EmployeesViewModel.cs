@@ -57,7 +57,6 @@ namespace StudApp.Mobile.ViewModel
                 {
                     var newWrapper = await _employeeService.AddEmployeeAsync(page);
 
-                    // ДОБАВЛЯЕМ новый wrapper в список сразу
                     if (newWrapper != null)
                     {
                         Employees.Add(newWrapper);
