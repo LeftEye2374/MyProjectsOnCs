@@ -13,11 +13,38 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0"
-                Text="Добавить сотрудника"
-                HorizontalOptions="End"
-                Margin="10"
-                Command="{Binding AddEmployeeCommand}"/>
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="10">
+            <Button Grid.Column="0"
+                    Text="Назад"
+                    BackgroundColor="LightGray"
+                    Command="{Binding GoBackCommand}"/>
+
+            <Label Grid.Column="1" 
+                   Text="Сотрудники"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <Button Grid.Column="2"
+                    Text="Добавить сотрудника"
+                    BackgroundColor="#0078D4"
+                    TextColor="White"
+                    Command="{Binding AddEmployeeCommand}"/>
+        </Grid>
+        
+        <Grid Grid.Row="1" 
+              ColumnDefinitions="*,*,*,*,*,*,Auto" 
+              Margin="10,0,10,5"
+              BackgroundColor="DarkGray">
+            <Label Grid.Column="0" Text="Имя" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="1" Text="Фамилия" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="2" Text="Отчество" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="3" Text="Смена" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="4" Text="Телефон" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="5" Text="Общ." FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+            <Label Grid.Column="6" Text="Этаж" FontAttributes="Bold" TextColor="White" Padding="10,5"/>
+        </Grid>
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Employees}"
@@ -26,7 +53,7 @@
                 <DataTemplate x:DataType="wrappers:EmployeeWrapper">
                     <Grid Padding="10" BackgroundColor="LightGray" Margin="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition  Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -35,12 +62,13 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding FirstName}" FontAttributes="Bold"/>
-                        <Label Grid.Column="1" Text="{Binding SecondName}"/>
-                        <Label Grid.Column="2" Text="{Binding LastName}"/>
+                        <Label Grid.Column="1" Text="{Binding LastName}"/>
+                        <Label Grid.Column="2" Text="{Binding SecondName}"/>
+                        <Label Grid.Column="3" Text="{Binding NumOfShiftText}"/>
                         <Label Grid.Column="4" Text="{Binding Phone}"/>
                         <Label Grid.Column="5" Text="{Binding Dormitry}"/>
                         <Label Grid.Column="6" Text="{Binding Flor}"/>
-                        <Label Grid.Column="6" Text="{Binding Room}" HorizontalOptions="End"/>
+                        <Label Grid.Column="7" Text="{Binding Room}" HorizontalOptions="End"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -68,5 +68,11 @@ namespace StudApp.Mobile.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Ошибка", $"Не удалось добавить сотрудника: {ex.Message}", "OK");
             }
         }
+
+        [RelayCommand]
+        private async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("ViewPage");
+        }
     }
 }

@@ -9,7 +9,15 @@ namespace StudApp.Mobile.Services
         public string GetCurrentShift()
         {
             int shiftNumber = GetShiftNumber(DateTime.Now) + 2;
-            return $"Смена {shiftNumber}";
+            if (shiftNumber > 4)
+            {
+                shiftNumber = 1;
+                return $"Смена {shiftNumber}";
+            }
+            else 
+            {
+                return $"Смена {shiftNumber}";
+            }
         }
 
         public int GetShiftNumber(DateTime date)
@@ -17,7 +25,6 @@ namespace StudApp.Mobile.Services
             int daysPassed = (int)(date.Date - _startDate.Date).TotalDays;
 
             int shiftIndex = daysPassed % TotalShifts;
-
             return shiftIndex + 1;
         }
     }
