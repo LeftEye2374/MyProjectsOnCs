@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:StudApp.Mobile.ViewModel"
+             xmlns:wrappers="clr-namespace:StudApp.Mobile.Wrappers"
              x:Class="StudApp.Mobile.View.EmployeesPage"
              x:DataType="viewmodels:EmployeesViewModel"
              Title="Сотрудники">
@@ -12,14 +13,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Кнопка сверху справа -->
         <Button Grid.Row="0"
                 Text="Добавить сотрудника"
                 HorizontalOptions="End"
                 Margin="10"
                 Command="{Binding AddEmployeeCommand}"/>
 
-        <!-- Таблица сотрудников -->
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Employees}"
                         Margin="10">
@@ -37,9 +36,10 @@
                         <Label Grid.Column="0" Text="{Binding FirstName}" FontAttributes="Bold"/>
                         <Label Grid.Column="1" Text="{Binding SecondName}"/>
                         <Label Grid.Column="2" Text="{Binding LastName}"/>
-                        <Label Grid.Column="3" Text="{Binding Role}"/>
                         <Label Grid.Column="4" Text="{Binding Phone}"/>
-                        <Label Grid.Column="5" Text="{Binding Dormitry}" HorizontalOptions="End"/>
+                        <Label Grid.Column="5" Text="{Binding Dormitry}"/>
+                        <Label Grid.Column="6" Text="{Binding Flor}"/>
+                        <Label Grid.Column="6" Text="{Binding Room}" HorizontalOptions="End"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

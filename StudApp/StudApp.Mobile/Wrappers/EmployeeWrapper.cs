@@ -66,13 +66,19 @@ namespace StudApp.Mobile.Wrappers
             set => SetProperty(Model.Role, value, Model, (model, value) => Model.Role = value);
         }
 
+        public int NumOfShift
+        {
+            get => model.NumOfShift;
+            set => SetProperty(Model.NumOfShift, value, Model, (model, value) => Model.NumOfShift = value);
+        }
+
         public ICollection<Report> Reports
         {
             get => model.Reports; 
         }
         public Guid ShiftId
         {
-            get => model.ShiftId;
+            get => (Guid)model.ShiftId;
             set => SetProperty(Model.ShiftId, value, Model, (model, value) => Model.ShiftId = value);
         }
 
@@ -86,6 +92,70 @@ namespace StudApp.Mobile.Wrappers
         {
             get => Model.Password;
             set => SetProperty(Model.Password, value, Model, (model, value) => model.Password = value);
+        }
+
+        public string DormitryText
+        {
+            get => model.ContactInfo.Dormitry == 0 ? string.Empty : model.ContactInfo.Dormitry.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.ContactInfo.Dormitry, 0, Model, (model, v) => Model.ContactInfo.Dormitry = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.ContactInfo.Dormitry, result, Model, (model, v) => Model.ContactInfo.Dormitry = result);
+                }
+            }
+        }
+
+        public string FlorText
+        {
+            get => model.ContactInfo.Flor == 0 ? string.Empty : model.ContactInfo.Flor.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.ContactInfo.Flor, 0, Model, (model, v) => Model.ContactInfo.Flor = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.ContactInfo.Flor, result, Model, (model, v) => Model.ContactInfo.Flor = result);
+                }
+            }
+        }
+
+        public string CursText
+        {
+            get => model.ContactInfo.Curs == 0 ? string.Empty : model.ContactInfo.Curs.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.ContactInfo.Curs, 0, Model, (model, v) => Model.ContactInfo.Curs = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.ContactInfo.Curs, result, Model, (model, v) => Model.ContactInfo.Curs = result);
+                }
+            }
+        }
+
+        public string NumOfShiftText
+        {
+            get => model.NumOfShift == 0 ? string.Empty : model.NumOfShift.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.NumOfShift, 0, Model, (model, v) => Model.NumOfShift = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.NumOfShift, result, Model, (model, v) => Model.NumOfShift = result);
+                }
+            }
         }
 
     }

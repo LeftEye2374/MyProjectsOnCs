@@ -5,6 +5,7 @@ using StudApp.AppDbContext;
 using StudApp.Mobile.Services;
 using StudApp.Mobile.View;
 using StudApp.Mobile.ViewModel;
+using StudApp.Mobile.Views;
 
 namespace StudApp.Mobile
 {
@@ -28,12 +29,11 @@ namespace StudApp.Mobile
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<ViewViewModel>();
             builder.Services.AddSingleton<EmployeesViewModel>();
-            builder.Services.AddSingleton<AddEmployeeViewModel>();
-            
+            builder.Services.AddSingleton<AddEmployeePopup>();
+
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
             builder.Services.AddSingleton<EmployeesPage>();
-            builder.Services.AddSingleton<AddEmployeePage>();
 
             builder.Services.AddSingleton<IShiftService, ShiftService>();
             builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
@@ -48,7 +48,7 @@ namespace StudApp.Mobile
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<SqliteDbContext>();
-                //db.Database.EnsureDeleted();
+                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
             return app;
