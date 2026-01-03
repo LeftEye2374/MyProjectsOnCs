@@ -20,35 +20,41 @@ namespace StudApp.Mobile
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                }).UseMauiCommunityToolkit();
+                })
+                .UseMauiCommunityToolkit();
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "StudApp.db");
-            builder.Services.AddDbContext<SqliteDbContext>(options =>
-                options.UseSqlite($"Filename={dbPath}"));
+            System.Diagnostics.Debug.WriteLine($"Путь к БД: {dbPath}");
 
-            builder.Services.AddSingleton<MainViewModel>();
-            builder.Services.AddSingleton<ViewViewModel>();
-            builder.Services.AddSingleton<EmployeesViewModel>();
-            builder.Services.AddSingleton<AddEmployeePopup>();
+            builder.Services.AddScoped<SqliteDbContext>(sp =>
+            {
+                var options = new DbContextOptionsBuilder<SqliteDbContext>()
+                    .UseSqlite($"Data Source={dbPath}")
+                    .Options;
+                return new SqliteDbContext(options);
+            });
 
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<ViewPage>();
-            builder.Services.AddSingleton<EmployeesPage>();
+            builder.Services.AddScoped<MainViewModel>();
+            builder.Services.AddScoped<ViewViewModel>();
+            builder.Services.AddScoped<EmployeesViewModel>();
+            builder.Services.AddTransient<AddEmployeePopup>(); 
 
-            builder.Services.AddSingleton<IShiftService, ShiftService>();
-            builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
-            builder.UseMauiCommunityToolkit();
+            builder.Services.AddScoped<MainPage>();
+            builder.Services.AddScoped<ViewPage>();
+            builder.Services.AddScoped<EmployeesPage>();
 
+            builder.Services.AddScoped<IShiftService, ShiftService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<SqliteDbContext>();
-                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
             return app;
