@@ -5,97 +5,104 @@
              x:Class="StudApp.Mobile.View.DocumentsPage"
              x:DataType="viewmodels:DocumentsViewModel"
              Title="Документы"
-             BackgroundColor="#F5F5F5">
+             BackgroundColor="#F8F9FA">
 
-    <Grid RowDefinitions="Auto,*" Padding="20">
+    <Grid RowDefinitions="Auto,*" Padding="0,0,0,20">
 
-        <Grid Grid.Row="0"
-              ColumnDefinitions="Auto,*"
-              Margin="0,0,0,20">
+        <!-- Заголовок: Назад + Документы -->
+        <Grid Grid.Row="0" 
+              ColumnDefinitions="Auto,*,Auto" 
+              HeightRequest="70"
+              BackgroundColor="White"
+              Margin="20,20,20,10">
 
             <Button Grid.Column="0"
-                    Text="Назад"
+                    Text="← Назад"
                     Command="{Binding GoBackCommand}"
-                    BackgroundColor="#E0E0E0"
-                    TextColor="Black"
+                    BackgroundColor="#E2E8F0"
+                    TextColor="#4A5568"
                     CornerRadius="12"
-                    Padding="18,10"
+                    Padding="16,0"
                     FontSize="16"
                     FontAttributes="Bold"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start" />
+                    VerticalOptions="Center"/>
 
             <Label Grid.Column="1"
                    Text="Документы"
-                   FontSize="32"
+                   FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   TextColor="#333333" />
+                   TextColor="#2D3748"/>
+
         </Grid>
 
-        <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Files}"
-                        SelectionMode="None"
-                        Margin="0,0,0,10">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:DocumentItem">
-                    <Grid ColumnDefinitions="70,*,Auto"
-                          HeightRequest="80"
-                          Margin="0,8"
-                          BackgroundColor="White">
+        <!-- Список документов из БД (Telegram-style) -->
+        <ScrollView Grid.Row="1" Margin="20,0">
+            <CollectionView ItemsSource="{Binding Files}"
+                           SelectionMode="None"
+                           Margin="0,0,0,20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:DocumentItem">
+                        <Grid ColumnDefinitions="70,*,Auto"
+                              HeightRequest="85"
+                              Margin="0,6"
+                              BackgroundColor="White"
+                              Stroke="#E2E8F0"
+                              StrokeThickness="1"
+                              StrokeShape="RoundRectangle 16"
+                              Padding="1">
 
-                        <Frame Grid.Column="0"
-                               BackgroundColor="#FF5722"
-                               CornerRadius="14"
-                               WidthRequest="60"
-                               HeightRequest="60"
-                               Margin="8,10"
-                               HasShadow="True"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center">
-                            <Image Source="pdf.png"
-                                   WidthRequest="32"
-                                   HeightRequest="32"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center" />
-                        </Frame>
+                            <!-- Иконка PDF (Unicode — без файлов!) -->
+                            <Grid Grid.Column="0">
+                                <Frame BackgroundColor="#E53E3E"
+                                       CornerRadius="14"
+                                       WidthRequest="60"
+                                       HeightRequest="60"
+                                       Margin="8,12,0,12"
+                                       HasShadow="True"/>
+                                <Label Text="📄"
+                                       FontSize="32"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       TextColor="White"/>
+                            </Grid>
 
-                        <VerticalStackLayout Grid.Column="1"
-                                             Margin="12,12,12,12"
-                                             Spacing="4">
-                            <Label Text="{Binding Name}"
-                                   FontSize="17"
-                                   FontAttributes="Bold"
-                                   LineBreakMode="TailTruncation"
-                                   MaxLines="2"
-                                   TextColor="#222222" />
+                            <!-- Информация о файле -->
+                            <VerticalStackLayout Grid.Column="1"
+                                                Margin="16,12,12,12"
+                                                Spacing="4">
+                                <Label Text="{Binding Name}"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"
+                                       TextColor="#2D3748"/>
+                                <Label Text="{Binding Size}"
+                                       FontSize="14"
+                                       TextColor="#718096"
+                                       Opacity="0.8"/>
+                            </VerticalStackLayout>
 
-                            <Label Text="{Binding Path}"
-                                   FontSize="13"
-                                   TextColor="Gray"
-                                   Opacity="0.8"
-                                   LineBreakMode="TailTruncation"
-                                   MaxLines="1" />
-                        </VerticalStackLayout>
+                            <!-- Кнопка СКАЧАТЬ -->
+                            <Button Grid.Column="2"
+                                    Text="Скачать"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DownloadFileCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#48BB78"
+                                    TextColor="White"
+                                    CornerRadius="12"
+                                    Padding="16,12"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    Margin="8,0,8,0"/>
 
-                        <Button Grid.Column="2"
-                                Text="Открыть"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFileCommand}"
-                                CommandParameter="{Binding .}"
-                                BackgroundColor="#0088CC"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="14,12"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                VerticalOptions="Center"
-                                HorizontalOptions="End"
-                                Margin="8,0,8,0" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
 
     </Grid>
 </ContentPage>

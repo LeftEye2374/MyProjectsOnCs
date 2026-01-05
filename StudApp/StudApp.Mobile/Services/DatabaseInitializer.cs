@@ -19,6 +19,7 @@ namespace StudApp.Mobile.Services
         {
             _logger.LogInformation("Инициализация БД...");
 
+            _db.Database.EnsureDeleted();
             _db.Database.EnsureCreated();
 
             if (!_db.Documents.Any())
@@ -34,45 +35,22 @@ namespace StudApp.Mobile.Services
 
         private async Task AddDocumentsAsync()
         {
-            var docsDir = Path.Combine(FileSystem.AppDataDirectory, "Documents");
-            Directory.CreateDirectory(docsDir);
-
             var documents = new[]
             {
-            new { Name = "Внутренний устав СОООП", AssetPath = "Documents/1.pdf" },
-            new { Name = "Договор найма жилого помещения", AssetPath = "Documents/2.pdf" },
-            new { Name = "Кодекс корпоративной культуры", AssetPath = "Documents/3.pdf" },
-            new { Name = "Положение о студ совете", AssetPath = "Documents/4.pdf" },
-            new { Name = "Положение общежитий", AssetPath = "Documents/5.pdf" },
-            new { Name = "Правила проживания в общежитии", AssetPath = "Documents/6.pdf" },
-            new { Name = "Устав КубГУ", AssetPath = "Documents/7.pdf" },
-            new { Name = "Устав СОООП", AssetPath = "Documents/8.pdf" }
-        };
+            new Document { Name = "Внутренний устав СОООП", FilePath = "Documents/1.pdf", FileData = new byte[1024*1024] },
+            new Document { Name = "Договор найма жилого помещения", FilePath = "Documents/2.pdf", FileData = new byte[1024*1024*2] },
+            new Document { Name = "Кодекс корпоративной культуры", FilePath = "Documents/3.pdf", FileData = new byte[1024*512] },
+            new Document { Name = "Положение о студ совете", FilePath = "Documents/4.pdf", FileData = new byte[1024*1024] },
+            new Document { Name = "Положение общежитий", FilePath = "Documents/5.pdf", FileData = new byte[1024*768] },
+            new Document { Name = "Правила проживания в общежитии", FilePath = "Documents/6.pdf", FileData = new byte[1024*1024*1] },
+             new Document { Name = "Устав КубГУ", FilePath = "Documents/7.pdf", FileData = new byte[1024*1024*3] },
+            new Document { Name = "Устав СОООП", FilePath = "Documents/8.pdf", FileData = new byte[1024*1024*2] }
+            };
 
-            foreach (var doc in documents)
-            {
-                try
-                {
-                    var targetPath = Path.Combine(docsDir, Path.GetFileName(doc.AssetPath));
-
-                    using var input = await FileSystem.OpenAppPackageFileAsync(doc.AssetPath);
-                    using var output = File.Create(targetPath);
-                    var fileData = new byte[input.Length];
-                    await input.ReadAsync(fileData, 0, (int)input.Length);
-
-                    _db.Documents.Add(new Document
-                    {
-                        Name = doc.Name,
-                        FilePath = targetPath,
-                        FileData = fileData
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, $"Ошибка добавления {doc.Name}");
-                }
-            }
+            _db.Documents.AddRange(documents);
             await _db.SaveChangesAsync();
         }
+
+
     }
 }

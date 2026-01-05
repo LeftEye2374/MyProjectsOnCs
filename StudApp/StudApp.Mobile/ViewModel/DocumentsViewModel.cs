@@ -17,73 +17,57 @@ namespace StudApp.Mobile.ViewModel
         public DocumentsViewModel(IDocumentService documentService)
         {
             _documentService = documentService;
-            LoadDocumentsAsync();  
+            LoadDocumentsAsync();
         }
 
         private async void LoadDocumentsAsync()
         {
             try
             {
-                Debug.WriteLine("🔄 Загрузка документов из БД...");
-                var documents = await _documentService.GetAllDocumentsAsync();
-
-                Debug.WriteLine($"📊 Найдено в БД: {documents.Count} документов");
+                Debug.WriteLine("Загрузка документов...");
+                var docs = await _documentService.GetAllDocumentsAsync();
 
                 Files.Clear();
-                foreach (var doc in documents)
+                foreach (var doc in docs)
                 {
-                    var item = new DocumentItem
+                    Files.Add(new DocumentItem
                     {
                         Name = doc.Name,
                         Path = doc.FilePath,
                         Size = $"{doc.FileData.Length / 1024} KB"
-                    };
-                    Files.Add(item);
-                    Debug.WriteLine($"✅ Добавлен: {item.Name}");
+                    });
                 }
-
-                Debug.WriteLine($"✅ Итого в списке: {Files.Count}");
+                Debug.WriteLine($"Загружено: {Files.Count}");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"❌ Ошибка БД: {ex}");
+                Debug.WriteLine($"{ex}");
             }
         }
-
 
         [RelayCommand]
         private async Task GoBack()
         {
-            await Shell.Current.GoToAsync("ViewPage");  
+            await Shell.Current.GoToAsync("..");
         }
 
         [RelayCommand]
-        private async Task OpenFile(DocumentItem item)
+        private async Task DownloadFile(DocumentItem item)
         {
             try
             {
-                var filePath = item.Path;
+                var downloadsDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
+                var fileName = Path.GetFileNameWithoutExtension(item.Path) + ".pdf";
+                var targetPath = Path.Combine(downloadsDir, fileName);
 
-                if (!File.Exists(filePath))
-                {
-                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Файл не найден", "OK");
-                    return;
-                }
+                var doc = await _documentService.GetDocumentByNameAsync(item.Name);
+                await File.WriteAllBytesAsync(targetPath, doc.FileData);
 
-                var result = await Launcher.Default.OpenAsync(new OpenFileRequest
-                {
-                    Title = item.Name,
-                    File = new ReadOnlyFile(filePath)
-                });
-
-                if (!result)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Ошибка", "Не удалось открыть файл", "OK");
-                }
+                await Application.Current.MainPage.DisplayAlert("Успех",
+                    $"Скачано: {targetPath}", "OK");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"❌ OpenFile ошибка: {ex}");
                 await Application.Current.MainPage.DisplayAlert("Ошибка", ex.Message, "OK");
             }
         }

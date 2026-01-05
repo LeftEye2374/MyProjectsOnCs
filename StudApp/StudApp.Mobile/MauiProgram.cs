@@ -56,8 +56,8 @@ namespace StudApp.Mobile
 
             var app = builder.Build();
 
-            using var scopeTwo = app.Services.CreateScope();
-            var initializer = scopeTwo.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
+            using var scope = app.Services.CreateScope();
+            var initializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
             initializer.InitializeAsync().GetAwaiter().GetResult();
             return app;
         }

@@ -17,5 +17,10 @@ namespace StudApp.Mobile.Services
         {
             return await _context.Documents.ToListAsync();
         }
+        public async Task<Document?> GetDocumentByNameAsync(string name)
+        {
+            return await _context.Documents.FirstOrDefaultAsync(d => d.Name == name);
+        }
+
     }
 }
