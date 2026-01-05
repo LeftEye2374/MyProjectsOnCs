@@ -1,31 +1,16 @@
-﻿
-namespace StudApp.Mobile.Services
+﻿namespace StudApp.Mobile.Services
 {
     public class ShiftService : IShiftService
     {
         private readonly DateTime _startDate = new DateTime(2026, 1, 1);
         private const int TotalShifts = 4;
+        private const int Offset = 2; 
 
         public string GetCurrentShift()
         {
-            int shiftNumber = GetShiftNumber(DateTime.Now) + 2;
-            if (shiftNumber > 4)
-            {
-                shiftNumber = 1;
-                return $"Смена {shiftNumber}";
-            }
-            else 
-            {
-                return $"Смена {shiftNumber}";
-            }
-        }
-
-        public int GetShiftNumber(DateTime date)
-        {
-            int daysPassed = (int)(date.Date - _startDate.Date).TotalDays;
-
-            int shiftIndex = daysPassed % TotalShifts;
-            return shiftIndex + 1;
+            int daysPassed = (int)((DateTime.Now.Date - _startDate.Date).TotalDays + Offset);
+            int currentShift = ((daysPassed % TotalShifts) + TotalShifts) % TotalShifts + 1; 
+            return $"Смена {currentShift}";
         }
     }
 }

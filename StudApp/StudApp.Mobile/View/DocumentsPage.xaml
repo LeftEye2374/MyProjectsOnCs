@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:StudApp.Mobile.ViewModels"
+             x:Class="StudApp.Mobile.Views.DocumentsPage"
+             x:DataType="viewmodels:DocumentsViewModel"
+             Title="Документы">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+
+        <!-- Заголовок -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,20">
+            <Button Grid.Column="0" 
+                    Text="Назад" 
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"
+                    CornerRadius="8"
+                    Padding="12,8"
+                    VerticalOptions="Center"
+                    Margin="0,5,0,0"/>
+
+            <Label Grid.Column="1" 
+                   Text="Документы" 
+                   FontSize="28" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Список файлов как в Telegram -->
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding Files}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:DocumentItem">
+                    <Grid ColumnDefinitions="60,*,Auto" 
+                          HeightRequest="70"
+                          Margin="0,5"
+                          BackgroundColor="White"
+                          Stroke="Gray"
+                          StrokeThickness="1"
+                          StrokeShape="RoundRectangle 12">
+
+                        <!-- Иконка файла -->
+                        <Image Grid.Column="0"
+                               Source="{Binding Icon}"
+                               WidthRequest="50"
+                               HeightRequest="50"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Margin="5"/>
+
+                        <!-- Название и детали -->
+                        <VerticalStackLayout Grid.Column="1" 
+                                            Margin="15,10,10,10"
+                                            Spacing="2">
+                            <Label Text="{Binding Name}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="TailTruncation"/>
+                            <Label Text="{Binding Size}"
+                                   FontSize="12"
+                                   TextColor="Gray"
+                                   Opacity="0.7"/>
+                        </VerticalStackLayout>
+
+                        <!-- Кнопка скачать/открыть -->
+                        <Button Grid.Column="2"
+                                Text="Открыть"
+                                BackgroundColor="#0088CC"
+                                TextColor="White"
+                                CornerRadius="6"
+                                Padding="8,0"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

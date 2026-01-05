@@ -30,19 +30,13 @@ namespace StudApp.Mobile.ViewModel
         [RelayCommand]
         private async Task Documents()
         {
-            await Shell.Current.GoToAsync("//DocumentsPage");
-        }
-
-        [RelayCommand]
-        private async Task Registration()
-        {
-            await Shell.Current.GoToAsync("//RegistrationPage");
+            await Shell.Current.GoToAsync("DocumentsPage");
         }
 
         [RelayCommand]
         private async Task Dormitory()
         {
-            await Shell.Current.GoToAsync("//DormitoryPage");
+            await Shell.Current.GoToAsync("DormitoryPage");
         }
 
         [RelayCommand]

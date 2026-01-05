@@ -3,6 +3,5 @@
     public interface IShiftService
     {
         string GetCurrentShift();
-        int GetShiftNumber(DateTime date);
     }
 }
