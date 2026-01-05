@@ -1,82 +1,94 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:StudApp.Mobile.ViewModels"
-             x:Class="StudApp.Mobile.Views.DocumentsPage"
+             xmlns:viewmodels="clr-namespace:StudApp.Mobile.ViewModel"
+             x:Class="StudApp.Mobile.View.DocumentsPage"
              x:DataType="viewmodels:DocumentsViewModel"
-             Title="Документы">
+             Title="Документы"
+             BackgroundColor="#F5F5F5">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="20">
 
-        <!-- Заголовок -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,20">
             <Button Grid.Column="0" 
                     Text="Назад" 
                     Command="{Binding GoBackCommand}"
                     BackgroundColor="LightGray"
                     TextColor="Black"
-                    CornerRadius="8"
-                    Padding="12,8"
+                    CornerRadius="12"
+                    Padding="16,10"
+                    FontSize="16"
+                    FontAttributes="Bold"
                     VerticalOptions="Center"
                     Margin="0,5,0,0"/>
 
             <Label Grid.Column="1" 
                    Text="Документы" 
-                   FontSize="28" 
+                   FontSize="32" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   TextColor="#333"/>
         </Grid>
 
-        <!-- Список файлов как в Telegram -->
-        <CollectionView Grid.Row="1" 
-                        ItemsSource="{Binding Files}"
-                        SelectionMode="Single">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:DocumentItem">
-                    <Grid ColumnDefinitions="60,*,Auto" 
-                          HeightRequest="70"
-                          Margin="0,5"
-                          BackgroundColor="White"
-                          Stroke="Gray"
-                          StrokeThickness="1"
-                          StrokeShape="RoundRectangle 12">
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding Files}"
+                           SelectionMode="None"
+                           RemainingItemsThreshold="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewmodels:DocumentItem">
+                        <Grid ColumnDefinitions="70,*,Auto" 
+                              HeightRequest="80"
+                              Margin="0,8"
+                              BackgroundColor="White"
+                              Padding="0">
 
-                        <!-- Иконка файла -->
-                        <Image Grid.Column="0"
-                               Source="{Binding Icon}"
-                               WidthRequest="50"
-                               HeightRequest="50"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Margin="5"/>
+                            <Frame Grid.Column="0"
+                                   BackgroundColor="#FF5722"
+                                   CornerRadius="14"
+                                   WidthRequest="60"
+                                   HeightRequest="60"
+                                   Margin="8,10"
+                                   HasShadow="True"
+                                   VerticalOptions="Center">
+                                <Image Source="{Binding Icon}"
+                                       WidthRequest="32"
+                                       HeightRequest="32"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
 
-                        <!-- Название и детали -->
-                        <VerticalStackLayout Grid.Column="1" 
-                                            Margin="15,10,10,10"
-                                            Spacing="2">
-                            <Label Text="{Binding Name}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   LineBreakMode="TailTruncation"/>
-                            <Label Text="{Binding Size}"
-                                   FontSize="12"
-                                   TextColor="Gray"
-                                   Opacity="0.7"/>
-                        </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" 
+                                                Margin="16,12,12,12"
+                                                Spacing="4">
+                                <Label Text="{Binding Name}"
+                                       FontSize="17" 
+                                       FontAttributes="Bold"
+                                       LineBreakMode="TailTruncation"
+                                       MaxLines="2"/>
+                                <Label Text="{Binding Size}"
+                                       FontSize="14"
+                                       TextColor="Gray"
+                                       Opacity="0.8"/>
+                            </VerticalStackLayout>
 
-                        <!-- Кнопка скачать/открыть -->
-                        <Button Grid.Column="2"
-                                Text="Открыть"
-                                BackgroundColor="#0088CC"
-                                TextColor="White"
-                                CornerRadius="6"
-                                Padding="8,0"
-                                VerticalOptions="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            <Button Grid.Column="2"
+                                    Text="Открыть"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFileCommand}"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="#0088CC"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Padding="12,14"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    Margin="8,0,8,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
 
     </Grid>
 </ContentPage>

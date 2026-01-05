@@ -1,12 +1,13 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Microsoft.EntityFrameworkCore;
 using StudApp.AppDbContext;
-using StudApp.Mobile.Views;
+using StudApp.Mobile.View;
 using StudApp.Mobile.Wrappers;
 using StudApp.Models;
 using System.Diagnostics;
 
-namespace StudApp.Mobile.Services {
+namespace StudApp.Mobile.Services
+{
 
     public class EmployeeService : IEmployeeService
     {

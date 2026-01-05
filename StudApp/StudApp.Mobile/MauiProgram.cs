@@ -5,8 +5,6 @@ using StudApp.AppDbContext;
 using StudApp.Mobile.Services;
 using StudApp.Mobile.View;
 using StudApp.Mobile.ViewModel;
-using StudApp.Mobile.ViewModels;
-using StudApp.Mobile.Views;
 
 namespace StudApp.Mobile
 {
@@ -44,7 +42,7 @@ namespace StudApp.Mobile
             builder.Services.AddScoped<MainPage>();
             builder.Services.AddScoped<ViewPage>();
             builder.Services.AddScoped<EmployeesPage>();
-            builder.Services.AddScoped<DocumentsViewModel>();
+            builder.Services.AddTransient<DocumentsViewModel>();
 
             builder.Services.AddScoped<IShiftService, ShiftService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();

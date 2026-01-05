@@ -1,23 +1,25 @@
 using CommunityToolkit.Maui.Views;
 using StudApp.Mobile.Wrappers;
 
-namespace StudApp.Mobile.Views;
-
-public partial class AddEmployeePopup : Popup
+namespace StudApp.Mobile.View
 {
-    public AddEmployeePopup(EmployeeWrapper wrapper)
-    {
-        InitializeComponent();
-        BindingContext = wrapper;
-    }
 
-    private void OnCancel(object sender, EventArgs e)
+    public partial class AddEmployeePopup : Popup
     {
-        Close(false);
-    }
+        public AddEmployeePopup(EmployeeWrapper wrapper)
+        {
+            InitializeComponent();
+            BindingContext = wrapper;
+        }
 
-    private void OnSave(object sender, EventArgs e)
-    {
-        Close(true);
+        private void OnCancel(object sender, EventArgs e)
+        {
+            Close(false);
+        }
+
+        private void OnSave(object sender, EventArgs e)
+        {
+            Close(true);
+        }
     }
 }
