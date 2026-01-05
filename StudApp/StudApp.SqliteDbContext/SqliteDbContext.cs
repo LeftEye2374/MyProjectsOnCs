@@ -10,6 +10,7 @@ namespace StudApp.AppDbContext
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         public SqliteDbContext(DbContextOptions options) : base(options)
         {
@@ -23,6 +24,7 @@ namespace StudApp.AppDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Document>().HasKey(d => d.Id);
 
             modelBuilder.Entity<Employee>().OwnsOne(e => e.PersonInfo);
             modelBuilder.Entity<Employee>().OwnsOne(e => e.ContactInfo);

@@ -46,6 +46,9 @@ namespace StudApp.Mobile
 
             builder.Services.AddScoped<IShiftService, ShiftService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IDocumentService, DocumentService>();
+            builder.Services.AddScoped<IDatabaseInitializer, DatabaseInitializer>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -53,11 +56,9 @@ namespace StudApp.Mobile
 
             var app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var db = scope.ServiceProvider.GetRequiredService<SqliteDbContext>();
-                db.Database.EnsureCreated();
-            }
+            using var scopeTwo = app.Services.CreateScope();
+            var initializer = scopeTwo.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
+            initializer.InitializeAsync().GetAwaiter().GetResult();
             return app;
         }
     }

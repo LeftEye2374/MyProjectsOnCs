@@ -65,8 +65,8 @@ namespace StudApp.Mobile.Services
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"❌ Ошибка при сохранении: {ex.Message}");
-                    Debug.WriteLine($"❌ InnerException: {ex.InnerException?.Message}");
+                    Debug.WriteLine($"Ошибка при сохранении: {ex.Message}");
+                    Debug.WriteLine($"InnerException: {ex.InnerException?.Message}");
                     await page.DisplayAlert("Ошибка БД", ex.InnerException?.Message ?? ex.Message, "OK");
                     return null;
                 }

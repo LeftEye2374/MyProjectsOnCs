@@ -57,6 +57,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Documents\1.pdf" />
+	  <None Remove="Documents\2.pdf" />
+	  <None Remove="Documents\3.pdf" />
+	  <None Remove="Documents\4.pdf" />
+	  <None Remove="Documents\5.pdf" />
+	  <None Remove="Documents\6.pdf" />
+	  <None Remove="Documents\7.pdf" />
+	  <None Remove="Documents\8.pdf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="Documents\1.pdf" />
+	  <MauiAsset Include="Documents\2.pdf" />
+	  <MauiAsset Include="Documents\3.pdf" />
+	  <MauiAsset Include="Documents\4.pdf" />
+	  <MauiAsset Include="Documents\5.pdf" />
+	  <MauiAsset Include="Documents\6.pdf" />
+	  <MauiAsset Include="Documents\7.pdf" />
+	  <MauiAsset Include="Documents\8.pdf" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />

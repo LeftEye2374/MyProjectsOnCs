@@ -1,0 +1,10 @@
+﻿namespace StudApp.Models
+{
+    public class Document
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+        public string FilePath { get; set; } = "";  
+        public byte[] FileData { get; set; } = [];   
+    }
+}

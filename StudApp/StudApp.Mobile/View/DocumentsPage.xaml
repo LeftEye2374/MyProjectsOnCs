@@ -7,88 +7,95 @@
              Title="Документы"
              BackgroundColor="#F5F5F5">
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="20">
+    <Grid RowDefinitions="Auto,*" Padding="20">
 
-        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,20">
-            <Button Grid.Column="0" 
-                    Text="Назад" 
+        <Grid Grid.Row="0"
+              ColumnDefinitions="Auto,*"
+              Margin="0,0,0,20">
+
+            <Button Grid.Column="0"
+                    Text="Назад"
                     Command="{Binding GoBackCommand}"
-                    BackgroundColor="LightGray"
+                    BackgroundColor="#E0E0E0"
                     TextColor="Black"
                     CornerRadius="12"
-                    Padding="16,10"
+                    Padding="18,10"
                     FontSize="16"
                     FontAttributes="Bold"
                     VerticalOptions="Center"
-                    Margin="0,5,0,0"/>
+                    HorizontalOptions="Start" />
 
-            <Label Grid.Column="1" 
-                   Text="Документы" 
-                   FontSize="32" 
+            <Label Grid.Column="1"
+                   Text="Документы"
+                   FontSize="32"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
-                   TextColor="#333"/>
+                   TextColor="#333333" />
         </Grid>
 
-        <ScrollView Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Files}"
-                           SelectionMode="None"
-                           RemainingItemsThreshold="2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="viewmodels:DocumentItem">
-                        <Grid ColumnDefinitions="70,*,Auto" 
-                              HeightRequest="80"
-                              Margin="0,8"
-                              BackgroundColor="White"
-                              Padding="0">
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Files}"
+                        SelectionMode="None"
+                        Margin="0,0,0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:DocumentItem">
+                    <Grid ColumnDefinitions="70,*,Auto"
+                          HeightRequest="80"
+                          Margin="0,8"
+                          BackgroundColor="White">
 
-                            <Frame Grid.Column="0"
-                                   BackgroundColor="#FF5722"
-                                   CornerRadius="14"
-                                   WidthRequest="60"
-                                   HeightRequest="60"
-                                   Margin="8,10"
-                                   HasShadow="True"
-                                   VerticalOptions="Center">
-                                <Image Source="{Binding Icon}"
-                                       WidthRequest="32"
-                                       HeightRequest="32"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center"/>
-                            </Frame>
+                        <Frame Grid.Column="0"
+                               BackgroundColor="#FF5722"
+                               CornerRadius="14"
+                               WidthRequest="60"
+                               HeightRequest="60"
+                               Margin="8,10"
+                               HasShadow="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center">
+                            <Image Source="pdf.png"
+                                   WidthRequest="32"
+                                   HeightRequest="32"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
 
-                            <VerticalStackLayout Grid.Column="1" 
-                                                Margin="16,12,12,12"
-                                                Spacing="4">
-                                <Label Text="{Binding Name}"
-                                       FontSize="17" 
-                                       FontAttributes="Bold"
-                                       LineBreakMode="TailTruncation"
-                                       MaxLines="2"/>
-                                <Label Text="{Binding Size}"
-                                       FontSize="14"
-                                       TextColor="Gray"
-                                       Opacity="0.8"/>
-                            </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1"
+                                             Margin="12,12,12,12"
+                                             Spacing="4">
+                            <Label Text="{Binding Name}"
+                                   FontSize="17"
+                                   FontAttributes="Bold"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="2"
+                                   TextColor="#222222" />
 
-                            <Button Grid.Column="2"
-                                    Text="Открыть"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFileCommand}"
-                                    CommandParameter="{Binding}"
-                                    BackgroundColor="#0088CC"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    Padding="12,14"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    VerticalOptions="Center"
-                                    Margin="8,0,8,0"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
+                            <Label Text="{Binding Path}"
+                                   FontSize="13"
+                                   TextColor="Gray"
+                                   Opacity="0.8"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1" />
+                        </VerticalStackLayout>
+
+                        <Button Grid.Column="2"
+                                Text="Открыть"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenFileCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="#0088CC"
+                                TextColor="White"
+                                CornerRadius="10"
+                                Padding="14,12"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center"
+                                HorizontalOptions="End"
+                                Margin="8,0,8,0" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </Grid>
 </ContentPage>
