@@ -9,7 +9,7 @@ namespace StudApplication.Mobile.ViewModel
     public partial class MainPageViewModel : ObservableObject
     {
         [ObservableProperty]
-        private EmployeeWrapper? _employeeWrapper;
+        public EmployeeWrapper? _employeeWrapper;
 
         public MainPageViewModel()
         {
@@ -19,7 +19,7 @@ namespace StudApplication.Mobile.ViewModel
         [RelayCommand(CanExecute = nameof(CanLogin))]
         private async Task LoginAsync() 
         {
-            await Shell.Current.GoToAsync("");
+            await Shell.Current.GoToAsync("ViewPage");
         }
 
         partial void OnEmployeeWrapperChanged(EmployeeWrapper? oldValue, EmployeeWrapper? newValue)

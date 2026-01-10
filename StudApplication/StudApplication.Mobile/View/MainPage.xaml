@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:StudApplication.Mobile.ViewModel" 
              x:DataType="viewmodels:MainPageViewModel"
              x:Class="StudApplication.Mobile.View.MainPage"
-             Title="MainPage">
+             Title="Autorization">
 
 
     <StackLayout VerticalOptions="Center" Padding="20">
