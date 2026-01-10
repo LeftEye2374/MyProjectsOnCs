@@ -48,7 +48,7 @@ namespace StudApp.Mobile.ViewModel
         [RelayCommand]
         private async Task GoBack()
         {
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.GoToAsync("ViewPage");
         }
 
         [RelayCommand]

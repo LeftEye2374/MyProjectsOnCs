@@ -8,8 +8,6 @@
              BackgroundColor="#F8F9FA">
 
     <Grid RowDefinitions="Auto,*" Padding="0,0,0,20">
-
-        <!-- Заголовок: Назад + Документы -->
         <Grid Grid.Row="0" 
               ColumnDefinitions="Auto,*,Auto" 
               HeightRequest="70"
@@ -34,10 +32,7 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    TextColor="#2D3748"/>
-
         </Grid>
-
-        <!-- Список документов из БД (Telegram-style) -->
         <ScrollView Grid.Row="1" Margin="20,0">
             <CollectionView ItemsSource="{Binding Files}"
                            SelectionMode="None"
@@ -48,12 +43,7 @@
                               HeightRequest="85"
                               Margin="0,6"
                               BackgroundColor="White"
-                              Stroke="#E2E8F0"
-                              StrokeThickness="1"
-                              StrokeShape="RoundRectangle 16"
                               Padding="1">
-
-                            <!-- Иконка PDF (Unicode — без файлов!) -->
                             <Grid Grid.Column="0">
                                 <Frame BackgroundColor="#E53E3E"
                                        CornerRadius="14"
@@ -67,8 +57,6 @@
                                        VerticalOptions="Center"
                                        TextColor="White"/>
                             </Grid>
-
-                            <!-- Информация о файле -->
                             <VerticalStackLayout Grid.Column="1"
                                                 Margin="16,12,12,12"
                                                 Spacing="4">
@@ -83,8 +71,6 @@
                                        TextColor="#718096"
                                        Opacity="0.8"/>
                             </VerticalStackLayout>
-
-                            <!-- Кнопка СКАЧАТЬ -->
                             <Button Grid.Column="2"
                                     Text="Скачать"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DownloadFileCommand}"
@@ -97,7 +83,6 @@
                                     FontAttributes="Bold"
                                     VerticalOptions="Center"
                                     Margin="8,0,8,0"/>
-
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
