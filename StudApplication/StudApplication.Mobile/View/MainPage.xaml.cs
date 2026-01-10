@@ -1,6 +1,6 @@
 ﻿using StudApplication.Mobile.ViewModel;
 
-namespace StudApplication.Mobile
+namespace StudApplication.Mobile.View
 {
     public partial class MainPage : ContentPage
     {
