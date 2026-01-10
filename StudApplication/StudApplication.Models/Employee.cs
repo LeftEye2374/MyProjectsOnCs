@@ -7,5 +7,7 @@
         public Autorization Autorization { get; set; }
         public int Shift { get; set; }        
         public int NumberOfReports { get; set; }
+        public ICollection<Report> Reports { get; set; } = new List<Report>();
+
     }
 }

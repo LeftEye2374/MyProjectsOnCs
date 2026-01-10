@@ -5,5 +5,7 @@
         public Person PersonInformation { get; set; }
         public ContactInfo ContactInformation { get; set; }
         public int NumberOfReports { get; set; }
+        public Report? Report { get; set; }
+
     }
 }
