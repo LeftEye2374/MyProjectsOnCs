@@ -1,1 +1,5 @@
-<Solution />
+<Solution>
+  <Project Path="StudApplication.Mobile/StudApplication.Mobile.csproj" />
+  <Project Path="StudApplication.Models/StudApplication.Models.csproj" />
+  <Project Path="StudApplications.AppDbContext/StudApplications.AppDbContext.csproj" />
+</Solution>
