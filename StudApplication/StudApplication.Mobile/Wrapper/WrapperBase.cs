@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StudApplication.Models;
 
-namespace StudApplication.Mobile.Wrappers
+namespace StudApplication.Mobile.Wrapper
 {
-    public abstract class BaseWrapper<T> : ObservableValidator where T : BaseModel
+    public abstract class WrapperBase<T> : ObservableValidator where T : BaseModel
     {
         protected readonly T model;
-        public BaseWrapper(T value)
+        public WrapperBase(T value)
         {
             this.model = value;
         }

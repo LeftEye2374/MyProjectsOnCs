@@ -1,34 +1,33 @@
 ﻿using StudApplication.Models;
 
-namespace StudApplication.Mobile.Wrappers
+namespace StudApplication.Mobile.Wrapper
 {
-    public class EmployeeWrapper : BaseWrapper<Employee>
+    public class EmployeeWrapper : WrapperBase<Employee>
     {
         public EmployeeWrapper(Employee model) : base(model) { }
-        
 
         public string FirstName
         {
             get => Model.PersonInformation.FirstName;
-            set => SetProperty(Model.PersonInformation.FirstName, value, Model, (model,value) => model.PersonInformation.FirstName = value); 
+            set => SetProperty(Model.PersonInformation.FirstName, value, Model, (model, value) => model.PersonInformation.FirstName = value);
         }
 
         public string MiddleName
         {
             get => Model.PersonInformation.MiddleName;
-            set => SetProperty(Model.PersonInformation.MiddleName, value, Model, (model,value) => model.PersonInformation.MiddleName = value);
+            set => SetProperty(Model.PersonInformation.MiddleName, value, Model, (model, value) => model.PersonInformation.MiddleName = value);
         }
 
         public string LastName
         {
             get => Model.PersonInformation.LastName;
-            set => SetProperty(Model.PersonInformation.LastName, value, Model, (model,value) => model.PersonInformation.LastName = value);
+            set => SetProperty(Model.PersonInformation.LastName, value, Model, (model, value) => model.PersonInformation.LastName = value); 
         }
 
         public string Faculty
         {
             get => Model.PersonInformation.Faculty;
-            set => SetProperty(Model.PersonInformation.Faculty, value, Model, (model, value) => model.PersonInformation.Faculty = value);
+            set => SetProperty(Model.PersonInformation.Faculty, value, Model, (model, value) => model.PersonInformation.Faculty = value);   
         }
 
         public string Curs
@@ -47,24 +46,63 @@ namespace StudApplication.Mobile.Wrappers
             }
         }
 
-        public string Login
+        public string Dormitory
         {
-            get => model.Autorization.Login;
-            set => SetProperty(Model.Autorization.Login, value, Model, (model, value) => model.Autorization.Login = value);
+            get => model.ContactInformation.Dormitory == 0 ? string.Empty : model.ContactInformation.Dormitory.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.ContactInformation.Dormitory, 0, Model, (model, v) => Model.ContactInformation.Dormitory = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.ContactInformation.Dormitory, result, Model, (model, v) => Model.ContactInformation.Dormitory = result);
+                }
+            }
+        }
+        public string Flor
+        {
+            get => model.ContactInformation.Flor == 0 ? string.Empty : model.ContactInformation.Flor.ToString();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    SetProperty(Model.ContactInformation.Flor, 0, Model, (model, v) => Model.ContactInformation.Flor = 0);
+                }
+                else if (int.TryParse(value, out int result))
+                {
+                    SetProperty(Model.ContactInformation.Flor, result, Model, (model, v) => Model.ContactInformation.Flor = result);
+                }
+            }
         }
 
+        public string Room
+        {
+            get => Model.ContactInformation.Room;
+            set => SetProperty(Model.ContactInformation.Room, value, Model, (model, value) => model.ContactInformation.Room = value);
+        }
+        public string PhoneNumber
+        {
+            get => Model.ContactInformation.PhoneNumber;
+            set => SetProperty(Model.ContactInformation.PhoneNumber, value, Model, (model, value) => model.ContactInformation.PhoneNumber = value);
+        }
+        public string Login
+        {
+            get => Model.Autorization.Login;
+            set => SetProperty(Model.Autorization.Login, value, Model, (model, value) => model.Autorization.Login = value);
+        }
         public string Password
         {
-            get => model.Autorization.Password;
+            get => Model.Autorization.Password;
             set => SetProperty(Model.Autorization.Password, value, Model, (model, value) => model.Autorization.Password = value);
         }
 
         public string Role
         {
-            get => model.Autorization.Role;
+            get => Model.Autorization.Role;
             set => SetProperty(Model.Autorization.Role, value, Model, (model, value) => model.Autorization.Role = value);
         }
-
         public string Shift
         {
             get => model.Shift == 0 ? string.Empty : model.Shift.ToString();
@@ -80,7 +118,6 @@ namespace StudApplication.Mobile.Wrappers
                 }
             }
         }
-
         public string NumberOfReports
         {
             get => model.NumberOfReports == 0 ? string.Empty : model.NumberOfReports.ToString();
@@ -96,7 +133,6 @@ namespace StudApplication.Mobile.Wrappers
                 }
             }
         }
-
         public ICollection<Report> Reports
         {
             get => model.Reports;

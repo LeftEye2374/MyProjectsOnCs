@@ -68,10 +68,4 @@
 	  <ProjectReference Include="..\StudApplications.AppDbContext\StudApplications.AppDbContext.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="View\ViewPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>

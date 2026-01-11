@@ -1,5 +1,7 @@
 <Solution>
-  <Project Path="StudApplication.Mobile/StudApplication.Mobile.csproj" />
+  <Project Path="StudApplication.Mobile/StudApplication.Mobile.csproj" Id="fa16544d-12f1-484e-aa47-f154751eb194">
+    <Deploy Solution="Debug|*" />
+  </Project>
   <Project Path="StudApplication.Models/StudApplication.Models.csproj" />
   <Project Path="StudApplications.AppDbContext/StudApplications.AppDbContext.csproj" />
 </Solution>

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StudApplication.Mobile.Wrappers;
+using StudApplication.Mobile.Wrapper;
 using StudApplication.Models;
 using System.ComponentModel;
 
@@ -9,17 +9,24 @@ namespace StudApplication.Mobile.ViewModel
     public partial class MainPageViewModel : ObservableObject
     {
         [ObservableProperty]
-        public EmployeeWrapper? _employeeWrapper;
+        private EmployeeWrapper? _employeeWrapper;
 
         public MainPageViewModel()
         {
-            EmployeeWrapper = new EmployeeWrapper(new Employee());
+            _employeeWrapper = new EmployeeWrapper(new Employee { PersonInformation = new Person(),
+                ContactInformation = new ContactInfo(),
+                Autorization = new Autorization() });
+
+            if (_employeeWrapper != null)
+            {
+                _employeeWrapper.PropertyChanged += OnEmployeeWrapperPropertyChanged;
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanLogin))]
-        private async Task LoginAsync() 
+        private async Task LoginAsync()
         {
-            await Shell.Current.GoToAsync("ViewPage");
+            await Shell.Current.GoToAsync("//");
         }
 
         partial void OnEmployeeWrapperChanged(EmployeeWrapper? oldValue, EmployeeWrapper? newValue)

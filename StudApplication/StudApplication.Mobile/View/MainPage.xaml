@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:StudApplication.Mobile.ViewModel" 
              x:DataType="viewmodels:MainPageViewModel"
-             x:Class="StudApplication.Mobile.View.MainPage"
+             x:Class="StudApplication.Mobile.MainPage"
              Title="Autorization">
-
 
     <StackLayout VerticalOptions="Center" Padding="20">
 
@@ -13,10 +12,11 @@
 
         <Entry x:Name="LoginEntry" Placeholder="Введите логин" Text="{Binding EmployeeWrapper.Login, Mode=TwoWay}" HorizontalOptions="Center" WidthRequest="300"/>
 
-        <Entry x:Name="PasswordEntry" Placeholder="Введите пароль" Text="{Binding EmployeeWrapper.Password, Mode=TwoWay}" HorizontalOptions="Center" WidthRequest="300"/>
+        <Entry x:Name="PasswordEntry" Placeholder="Введите пароль" Text="{Binding EmployeeWrapper.Password}" HorizontalOptions="Center" WidthRequest="300"/>
 
         <Button x:Name="LoginButton" Text="Войти" FontSize="18" HorizontalOptions="Center" WidthRequest="300" Command="{Binding LoginCommand}"/>
 
     </StackLayout>
+
 
 </ContentPage>

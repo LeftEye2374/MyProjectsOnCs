@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using StudApplication.Mobile.View;
 using StudApplication.Mobile.ViewModel;
 using StudApplications.AppDbContext;
 
@@ -18,16 +17,13 @@ namespace StudApplication.Mobile
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).UseMauiCommunityToolkit();
 
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "StudApplication.db");
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "StudApp.db");
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite($"Filename={dbPath}"));
 
+            builder.Services.AddSingleton<MainPage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
-            builder.Services.AddSingleton<ViewPageViewModel>();
-
-            builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddSingleton<ViewPage>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
