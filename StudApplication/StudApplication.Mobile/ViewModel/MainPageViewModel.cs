@@ -26,7 +26,7 @@ namespace StudApplication.Mobile.ViewModel
         [RelayCommand(CanExecute = nameof(CanLogin))]
         private async Task LoginAsync()
         {
-            await Shell.Current.GoToAsync("//");
+            await Shell.Current.GoToAsync("ViewPage");
         }
 
         partial void OnEmployeeWrapperChanged(EmployeeWrapper? oldValue, EmployeeWrapper? newValue)

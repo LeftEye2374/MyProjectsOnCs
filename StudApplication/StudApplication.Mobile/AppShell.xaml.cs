@@ -1,4 +1,6 @@
-﻿namespace StudApplication.Mobile
+﻿using StudApplication.Mobile.View;
+
+namespace StudApplication.Mobile
 {
     public partial class AppShell : Shell
     {
@@ -6,6 +8,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPage),typeof(MainPage));
+            Routing.RegisterRoute(nameof(ViewPage), typeof(ViewPage));
         }
     }
 }

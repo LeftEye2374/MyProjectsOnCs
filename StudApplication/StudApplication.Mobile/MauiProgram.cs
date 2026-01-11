@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StudApplication.Mobile.View;
 using StudApplication.Mobile.ViewModel;
 using StudApplications.AppDbContext;
 
@@ -22,12 +23,22 @@ namespace StudApplication.Mobile
                 options.UseSqlite($"Filename={dbPath}"));
 
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<ViewPage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<ViewPageViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-            return builder.Build();
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                //db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+            }
+            return app;
         }
     }
 }
