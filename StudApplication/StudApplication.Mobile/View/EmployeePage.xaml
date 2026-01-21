@@ -48,7 +48,7 @@
             ItemsSource="{Binding Employees}"
                         Margin="10">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="wrappers:EmployeeWrapper">
+                <DataTemplate>
                     <Grid Padding="0" BackgroundColor="WhiteSmoke" Margin="0,0,0,1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

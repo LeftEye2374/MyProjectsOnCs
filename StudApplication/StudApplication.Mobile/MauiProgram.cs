@@ -25,13 +25,14 @@ namespace StudApplication.Mobile
 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
-            builder.Services.AddSingleton<EmployeePage>();
+            builder.Services.AddTransient<EmployeePage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<ViewPageViewModel>();
-            builder.Services.AddSingleton<EmployeePageViewModel>();
+            builder.Services.AddTransient<EmployeePageViewModel>();
 
             builder.Services.AddSingleton<ICurrentShiftService, CurrentShiftService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    x:TypeArguments="system:Boolean"
+    x:Class="StudApplication.Mobile.Views.AddEmployeePopup">
+
+    <ScrollView MaximumHeightRequest="500">
+        <VerticalStackLayout Spacing="10">
+            <Entry Text="{Binding FirstName}" Placeholder="Имя" />
+            <Entry Text="{Binding LastName}" Placeholder="Фамилия" />
+            <Entry Text="{Binding SecondName}" Placeholder="Отчество" />
+            <Entry Text="{Binding Phone}" Placeholder="Телефон" />
+            <Entry Text="{Binding NumOfShiftText}" Placeholder="Смена" />
+            <Entry Text="{Binding DormitryText}" Placeholder="Общ." />
+            <Entry Text="{Binding FlorText}" Placeholder="Этаж" />
+            <Entry Text="{Binding Room}" Placeholder="Комната" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                <Button Grid.Column="0" Text="Отмена" Clicked="OnCancel" BackgroundColor="LightGray" />
+                <Button Grid.Column="1" Text="Сохранить" Clicked="OnSave" BackgroundColor="#0078D4" TextColor="White" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</toolkit:Popup>

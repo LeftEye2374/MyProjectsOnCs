@@ -55,7 +55,7 @@ namespace StudApplication.Mobile.ViewModel
         [RelayCommand]
         private async Task EmployeesTable()
         {
-            await Shell.Current.GoToAsync("EmployeesPage");
+            await Shell.Current.GoToAsync("EmployeePage");
         }
     }
 }
