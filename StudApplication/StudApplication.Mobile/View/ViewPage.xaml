@@ -10,7 +10,7 @@
                             VerticalOptions="Center" 
                             HorizontalOptions="Center">
 
-            <Label Text="{Binding }" 
+            <Label Text="{Binding CurrentShift}" 
                    FontSize="48" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center"

@@ -9,6 +9,7 @@ namespace StudApplication.Mobile
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPage),typeof(MainPage));
             Routing.RegisterRoute(nameof(ViewPage), typeof(ViewPage));
+            Routing.RegisterRoute(nameof(EmployeePage), typeof(EmployeePage));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using StudApplication.Mobile.Service;
 using StudApplication.Mobile.View;
 using StudApplication.Mobile.ViewModel;
 using StudApplications.AppDbContext;
@@ -24,9 +25,13 @@ namespace StudApplication.Mobile
 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
+            builder.Services.AddSingleton<EmployeePage>();
 
             builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<ViewPageViewModel>();
+            builder.Services.AddSingleton<EmployeePageViewModel>();
+
+            builder.Services.AddSingleton<ICurrentShiftService, CurrentShiftService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

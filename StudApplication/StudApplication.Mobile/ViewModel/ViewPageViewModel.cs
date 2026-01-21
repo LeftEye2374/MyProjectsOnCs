@@ -32,10 +32,12 @@ namespace StudApplication.Mobile.ViewModel
             });
         }
 
+
+
         [RelayCommand]
         private async Task Violators()
         {
-            await Shell.Current.GoToAsync("//ViolatorsPage");
+            await Shell.Current.GoToAsync("//IntruderPage");
         }
 
         [RelayCommand]
@@ -53,7 +55,7 @@ namespace StudApplication.Mobile.ViewModel
         [RelayCommand]
         private async Task EmployeesTable()
         {
-            await Shell.Current.GoToAsync("//EmployeesPage");
+            await Shell.Current.GoToAsync("EmployeesPage");
         }
     }
 }

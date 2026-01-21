@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudApplication.Mobile.View.EmployeePage"
+             Title="EmployeePage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="10">
+            <Button Grid.Column="0"
+                    Text="Назад"
+                    BackgroundColor="LightGray"
+                    Command="{Binding GoBackCommand}"/>
+
+            <Label Grid.Column="1" 
+                   Text="Сотрудники"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <Button Grid.Column="2"
+                    Text="Добавить сотрудника"
+                    BackgroundColor="#0078D4"
+                    TextColor="White"
+                    Command="{Binding AddEmployeeCommand}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              ColumnDefinitions="*,*,*,*,*,*,*,Auto" 
+              Margin="10,0,10,0"
+              BackgroundColor="DarkGray">
+            <Label Grid.Column="0" Text="Имя" FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="1" Text="Фамилия" FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="2" Text="Отчество" FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="3" Text="Смена" FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="4" Text="Телефон" FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="5" Text="Общ." FontAttributes="Bold" TextColor="White" Padding="10,8,0,8" VerticalOptions="Center"/>
+            <Label Grid.Column="6" Text="Этаж" FontAttributes="Bold" TextColor="White" Padding="10,8" VerticalOptions="Center"/>
+            <Label Grid.Column="7" Text="Комната" FontAttributes="Bold" TextColor="White" Padding="10,8" VerticalOptions="Center"/>
+        </Grid>
+
+        <CollectionView Grid.Row="2"  
+            ItemsSource="{Binding Employees}"
+                        Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="wrappers:EmployeeWrapper">
+                    <Grid Padding="0" BackgroundColor="WhiteSmoke" Margin="0,0,0,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding FirstName}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding LastName}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="2" Text="{Binding SecondName}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="3" Text="{Binding NumOfShiftText}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="4" Text="{Binding Phone}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="5" Text="{Binding DormitryText}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="6" Text="{Binding FlorText}" Padding="10,8" VerticalOptions="Center"/>
+                        <Label Grid.Column="7" Text="{Binding Room}" Padding="10,8" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
