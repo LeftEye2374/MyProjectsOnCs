@@ -5,9 +5,23 @@ namespace MyWebApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddRazorComponents()
+                .AddInteractiveServerComponents();
+
             var app = builder.Build();
 
-            app.MapGet("/", () => "Hello Misha!");
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error", createScopeForErrors: true);
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAntiforgery();
+
+            app.MapStaticAssets();
+
 
             app.Run();
         }
