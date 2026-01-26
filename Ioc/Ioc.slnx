@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="MyWebApp/MyWebApp.csproj" Id="d22d3384-acd4-4221-9d1b-ac1e18588b4f" />
+  <Project Path="WebAppDeployment/WebAppDeployment.csproj" Id="1626a15d-b0ed-4ab7-a9c0-90eb466e8104" />
   <Project Path="WebAppForBoilerplate/WebAppForBoilerplate.csproj" />
 </Solution>
