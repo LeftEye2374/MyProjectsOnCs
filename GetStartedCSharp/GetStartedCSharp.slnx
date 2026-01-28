@@ -1,3 +1,8 @@
 <Solution>
+  <Folder Name="/webApp/">
+    <File Path="app.js" />
+    <File Path="index.html" />
+    <File Path="main.css" />
+  </Folder>
   <Project Path="FirstModel/FirstModel.csproj" />
 </Solution>
