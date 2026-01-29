@@ -23,13 +23,14 @@ namespace StudApplication.Mobile
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite($"Filename={dbPath}"));
 
-            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<MainPage>();
             builder.Services.AddSingleton<ViewPage>();
-            builder.Services.AddTransient<EmployeePage>();
+            builder.Services.AddSingleton<EmployeePage>();
+            builder.Services.AddTransient<AddEmployeePage>();
 
-            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddSingleton<ViewPageViewModel>();
-            builder.Services.AddTransient<EmployeePageViewModel>();
+            builder.Services.AddSingleton<EmployeePageViewModel>();
 
             builder.Services.AddSingleton<ICurrentShiftService, CurrentShiftService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();

@@ -27,9 +27,7 @@ namespace StudApplication.Mobile.ViewModel
         [RelayCommand]
         private async Task AddEmployee()
         {
-            var newWrapper = await _employeeService.AddEmployeeAsync();
-            if (newWrapper != null)
-                Employees.Add(newWrapper);
+            await Shell.Current.GoToAsync("AddEmployeePage");
         }
     }
 }
